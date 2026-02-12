@@ -1,0 +1,104 @@
+// 响应式断点
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1600px;
+
+// 设计变量
+:root {
+  // 主色系 - 高顿教育橙色
+  --primary-color: #ff6e00;
+  --primary-hover: #ff8c00;
+  --primary-light: rgba(255, 110, 0, 0.15);
+  --primary-text: rgb(255, 110, 0);
+
+  // 功能色
+  --success-color: #52c41a;
+  --success-hover: #73d13d;
+  --success-color-light: rgba(82, 196, 26, 0.15);
+  --warning-color: #faad14;
+  --warning-hover: #ffc53d;
+  --warning-color-light: rgba(250, 173, 20, 0.15);
+  --danger-color: #f5222d;
+  --danger-hover: #ff4d4f;
+  --danger-color-light: rgba(245, 34, 45, 0.15);
+  --info-color: #1890ff;
+  --info-hover: #40a9ff;
+  --info-color-light: rgba(24, 144, 255, 0.15);
+
+  // 文字色系
+  --color-text-primary: rgba(0, 0, 0, 0.85);
+  --color-text-secondary: rgba(0, 0, 0, 0.65);
+  --color-text-disabled: rgba(0, 0, 0, 0.25);
+  --color-text-placeholder: rgba(0, 0, 0, 0.25);
+
+  // 背景色系
+  --color-background: #f5f5f5;
+  --color-bg: #f5f5f5;
+  --color-white: #ffffff;
+  --color-disabled: #f5f5f5;
+
+  // 边框色系
+  --color-border: #d9d9d9;
+  --color-border-light: #f0f0f0;
+  --color-border-disabled: #e8e8e8;
+
+  // 阴影色系
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  // 字号
+  --font-size-xxs: 10px;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 24px;
+  --font-size-xxxl: 32px;
+
+  // 字重
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  // 行高
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+
+  // 间距
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-xxxl: 64px;
+
+  // 布局尺寸
+  --header-height: 60px;
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 64px;
+  --footer-height: 48px;
+
+  // 圆角
+  --border-radius-xs: 2px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-round: 50%;
+
+  // 过渡
+  --transition-duration: 0.3s;
+  --transition-timing: ease-in-out;
+}
