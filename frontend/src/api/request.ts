@@ -28,10 +28,17 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response) => {
+    // 后端返回 {code, message, data} 格式
+    // 直接返回完整的 response.data，以便调用方可以访问 code, message, data
     return response.data;
   },
   (error) => {
     const { response } = error;
+
+    // 添加调试日志
+    if (error.response) {
+      console.error('[Request Error]', error.response.status, error.response.data);
+    }
 
     if (response) {
       switch (response.status) {

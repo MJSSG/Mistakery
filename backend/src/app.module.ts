@@ -45,11 +45,14 @@ import { AppCacheModule } from './modules/cache/cache.module';
 
     // 认证模块
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'your-secret-key',
-      signOptions: {
-        expiresIn: process.env.JWT_EXPIRES_IN || '7d',
-      },
+    JwtModule.registerAsync({
+      global: true,
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET || 'your-secret-key',
+        signOptions: {
+          expiresIn: process.env.JWT_EXPIRES_IN || '7d',
+        },
+      }),
     }),
 
     // 业务模块

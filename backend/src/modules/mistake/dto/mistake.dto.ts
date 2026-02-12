@@ -124,10 +124,15 @@ export class QueryMistakeDto {
   @IsOptional()
   type?: string;
 
-  @ApiProperty({ description: '掌握程度', required: false })
-  @IsEnum(['unknown', 'familiar', 'mastered'])
+  @ApiProperty({ description: '难度级别', required: false, enum: ['easy', 'medium', 'hard'] })
+  @IsEnum(['easy', 'medium', 'hard'])
   @IsOptional()
-  masteryLevel?: 'unknown' | 'familiar' | 'mastered';
+  difficultyLevel?: 'easy' | 'medium' | 'hard';
+
+  @ApiProperty({ description: '掌握程度', required: false, enum: ['new', 'reviewing', 'reviewed', 'mastered'] })
+  @IsEnum(['new', 'reviewing', 'reviewed', 'mastered'])
+  @IsOptional()
+  masteryLevel?: 'new' | 'reviewing' | 'reviewed' | 'mastered';
 
   @ApiProperty({ description: '是否收藏', required: false })
   @IsOptional()
@@ -145,6 +150,21 @@ export class QueryMistakeDto {
   @IsString()
   @IsOptional()
   keyword?: string;
+
+  @ApiProperty({ description: '排序方式', required: false, enum: ['recent', 'oldest', 'difficulty', 'errorCount', 'reviewCount'] })
+  @IsString()
+  @IsOptional()
+  sortBy?: 'recent' | 'oldest' | 'difficulty' | 'errorCount' | 'reviewCount';
+
+  @ApiProperty({ description: '错误次数', required: false })
+  @IsString()
+  @IsOptional()
+  errorCount?: string;
+
+  @ApiProperty({ description: '时间范围', required: false })
+  @IsString()
+  @IsOptional()
+  timeRange?: string;
 }
 
 export class ParseMistakeDto {

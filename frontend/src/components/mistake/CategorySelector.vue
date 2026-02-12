@@ -73,7 +73,8 @@ const selectedId = computed({
 const isSelected = (id: string) => selectedId.value === id;
 
 const handleSelect = (id: string) => {
-  selectedId.value = id;
+  // 同时更新内部状态和触发父组件更新
+  emit('update:modelValue', id);
   emit('select', id);
 };
 </script>

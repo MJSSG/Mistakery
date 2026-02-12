@@ -128,11 +128,13 @@ frontend/src/
 所有 API 响应遵循统一格式：
 ```typescript
 {
-  success: boolean,
-  data: any,
-  message: string
+  code: number,
+  message: string,
+  data: any
 }
 ```
+
+**注意**: 后端返回 `{code, message, data}` 格式，通过响应拦截器转换后前端接收 `{success, data, message}` 格式。
 
 ### 错误处理
 
@@ -168,11 +170,69 @@ frontend/src/
 - 基于路由的懒加载实现代码分割
 - Pinia stores 管理状态，包含 actions、getters
 
+#### Pinia Store 模式
+```typescript
+export const useExampleStore = defineStore('example', () => {
+  // State
+  const items = ref<Item[]>([]);
+  const status = ref<'idle' | 'loading' | 'succeeded' | 'failed'>('idle');
+
+  // Getters
+  const filteredItems = computed(() => items.value.filter(...));
+
+  // Actions
+  async function fetchItems() {
+    status.value = 'loading';
+    try {
+      const response = await api.getItems();
+      items.value = response.data;
+      status.value = 'succeeded';
+    } catch (error) {
+      status.value = 'failed';
+    }
+  }
+
+  return { items, status, filteredItems, fetchItems };
+});
+```
+
+#### 路由守卫模式
+- 路由守卫直接检查 `localStorage` 而非依赖 store
+- 避免 store 初始化时序问题
+- 未认证时重定向到登录页
+
+#### 组件通信模式
+- 父子组件通信优先使用 `v-model` 双向绑定
+- 子组件定义 `modelValue` prop 和 `update:modelValue` emit
+- 示例：
+  ```vue
+  <!-- 父组件 -->
+  <ChildComponent v-model="filters" />
+
+  <!-- 子组件 -->
+  <script setup>
+  const props = defineProps<{ modelValue: Filters }>();
+  const emit = defineEmits<{ 'update:modelValue': [filters: Filters] }>();
+  const localValue = computed({
+    get: () => props.modelValue,
+    set: (val) => emit('update:modelValue', val)
+  });
+  </script>
+  ```
+
 ### 后端模式
 - 模块化架构，NestJS 功能模块
 - 构造函数依赖注入
 - 装饰器使用：`@Controller`、`@Service`、`@Get`、`@Post`、`@UseGuards`
 - DTO 配合 class-validator 进行数据验证
+
+#### 模块文件结构
+每个模块遵循固定模式：
+- `module-name.controller.ts` - HTTP 请求处理
+- `module-name.service.ts` - 业务逻辑
+- `module-name.module.ts` - 模块定义和依赖配置
+- `dto/` - 数据传输对象 (DTO) 和验证
+- `entities/` - TypeORM 数据库实体
 
 ## 环境变量
 

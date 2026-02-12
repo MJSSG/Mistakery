@@ -147,7 +147,7 @@ router.beforeEach((to, from, next) => {
   // 设置页面标题
   document.title = to.meta.title ? `${to.meta.title} - Mistakery` : 'Mistakery';
 
-  // 检查认证 - 直接检查 localStorage 以避免 store 初始化问题
+  // 检查认证 - 直接检查 localStorage 以避免 store 初始化时序问题
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth !== false);
   const hasToken = !!localStorage.getItem('token');
 

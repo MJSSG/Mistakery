@@ -5,7 +5,7 @@ import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CreateSubjectDto, UpdateSubjectDto } from './dto/subject.dto';
 
 @ApiTags('subject')
-@Controller('subject')
+@Controller('subjects')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class SubjectController {

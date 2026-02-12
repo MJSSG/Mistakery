@@ -32,7 +32,7 @@
       <div class="list-layout">
         <!-- 筛选面板 -->
         <FilterPanel
-          v-model:filters="filters"
+          v-model="filters"
           :total-count="filteredCount"
           :subjects="subjectOptions"
           @reset="handleResetFilters"
@@ -114,7 +114,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, computed, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import {
@@ -144,8 +144,25 @@ const selectedIds = ref<Set<string>>(new Set());
 const deletedIds = ref<Set<string>>(new Set());
 
 const filters = reactive<MistakeFilters>({
+  keyword: '',
   sortBy: 'recent',
+  subjectId: '',
+  type: '',
+  difficultyLevel: '',
+  masteryLevel: '',
+  errorCount: '',
+  timeRange: '',
 });
+
+// 监听 filters 变化，自动触发数据获取
+watch(
+  () => filters,
+  () => {
+    pagination.page = 1;
+    fetchData();
+  },
+  { deep: true, flush: 'sync' },
+);
 
 const pagination = reactive({
   page: 1,
@@ -159,14 +176,11 @@ const editingMistakeId = ref('');
 
 const subjectOptions = computed(() => {
   return [
-    { value: 'math', label: '数学' },
-    { value: 'english', label: '英语' },
-    { value: 'chinese', label: '语文' },
-    { value: 'physics', label: '物理' },
-    { value: 'chemistry', label: '化学' },
-    { value: 'biology', label: '生物' },
-    { value: 'history', label: '历史' },
-    { value: 'geography', label: '地理' },
+    { value: 'politics', label: '政治理论' },
+    { value: 'general', label: '常识判断' },
+    { value: 'verbal', label: '言语理解' },
+    { value: 'reasoning', label: '判断推理' },
+    { value: 'quant', label: '数量关系' },
   ];
 });
 
@@ -175,32 +189,47 @@ const selectedCount = computed(() => selectedIds.value.size);
 const fetchData = async () => {
   loading.value = true;
   try {
-    const response = await mistakeStore.fetchMistakes({
-      ...filters,
+    // 过滤掉空字符串参数
+    const params: any = {
       page: pagination.page,
       limit: pagination.limit,
-    });
+    };
 
-    mistakes.value = response.items.map((item: any, index: number) => ({
+    if (filters.sortBy) params.sortBy = filters.sortBy;
+    if (filters.keyword) params.keyword = filters.keyword;
+    if (filters.subjectId) params.subjectId = filters.subjectId;
+    if (filters.type) params.type = filters.type;
+    if (filters.difficultyLevel) params.difficultyLevel = filters.difficultyLevel;
+    if (filters.masteryLevel) params.masteryLevel = filters.masteryLevel;
+    if (filters.errorCount) params.errorCount = filters.errorCount;
+    if (filters.timeRange) params.timeRange = filters.timeRange;
+
+    const response = await mistakeStore.fetchMistakes(params);
+
+    // 后端返回格式: { code, message, data: { items, data, total } }
+    // 响应拦截器返回了内层的 data 对象
+    const items = response.data?.data || response.data?.items || [];
+
+    mistakes.value = items.map((item: any, index: number) => ({
       id: item.id,
       index: (pagination.page - 1) * pagination.limit + index + 1,
       question: item.question,
-      subject: item.subject,
+      subject: item.subject?.name || item.subject,
       questionType: item.type,
-      difficulty: item.difficulty,
-      myAnswer: item.myAnswer,
-      correctAnswer: item.correctAnswer,
+      difficulty: item.difficultyLevel,
+      myAnswer: item.userAnswer,
+      correctAnswer: item.answer,
       errorCount: item.errorCount || 1,
       reviewCount: item.reviewCount || 0,
       reviewStatus: item.reviewStatus || 'new',
       note: item.note,
       createdAt: item.createdAt,
-      subjectColor: getSubjectColor(item.subject),
+      subjectColor: item.subject?.color || getSubjectColor(item.subject?.name),
     }));
 
-    totalCount.value = response.total || 0;
-    filteredCount.value = response.total || 0;
-    total.value = response.total || 0;
+    totalCount.value = response.data?.total || 0;
+    filteredCount.value = response.data?.total || 0;
+    total.value = response.data?.total || 0;
   } catch (error: any) {
     ElMessage.error(error.message || '获取错题列表失败');
   } finally {
@@ -210,14 +239,11 @@ const fetchData = async () => {
 
 const getSubjectColor = (subject: string): string => {
   const colorMap: Record<string, string> = {
-    数学: '#409EFF',
-    英语: '#67C23A',
-    语文: '#E6A23C',
-    物理: '#F56C6C',
-    化学: '#909399',
-    生物: '#67C23A',
-    历史: '#E6A23C',
-    地理: '#409EFF',
+    政治理论: '#e74c3c',
+    常识判断: '#3498db',
+    言语理解: '#9b59b6',
+    判断推理: '#1abc9c',
+    数量关系: '#e67e22',
   };
   return colorMap[subject] || '#909399';
 };
@@ -241,15 +267,16 @@ const handleSizeChange = (size: number) => {
 const handleResetFilters = () => {
   Object.assign(filters, {
     keyword: '',
-    subject: '',
-    difficulty: '',
-    status: '',
-    questionType: '',
+    subjectId: '',
+    type: '',
+    difficultyLevel: '',
+    masteryLevel: '',
     errorCount: '',
     timeRange: '',
     sortBy: 'recent',
   });
-  handleSearch();
+  pagination.page = 1;
+  fetchData();
 };
 
 // 选择相关

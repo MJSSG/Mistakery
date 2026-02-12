@@ -62,6 +62,8 @@ export interface MistakeListParams {
   page?: number;
   limit?: number;
   keyword?: string;
+  errorCount?: string;
+  timeRange?: string;
 }
 
 export const mistakeApi = {

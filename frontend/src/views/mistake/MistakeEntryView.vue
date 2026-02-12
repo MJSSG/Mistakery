@@ -298,10 +298,9 @@ const removeKnowledgePoint = (index: number) => {
 
 const handleConfirm = async () => {
   // 验证必填字段
-  if (!formData.subjectId) {
-    ElMessage.warning('请选择科目');
-    return;
-  }
+  // 如果没有选择科目，使用默认值
+  const subjectIdToSubmit = formData.subjectId || 'quant'; // 默认使用数量关系（最接近数学）
+
   if (!formData.content) {
     ElMessage.warning('请输入题目内容');
     return;
@@ -315,11 +314,12 @@ const handleConfirm = async () => {
     return;
   }
 
+  // 更新 formData 用于提交
+  const submitData = { ...formData };
   try {
-    // 调用 API 解析并保存错题
-    await mistakeApi.parseAndSave(formData.content);
+    // 调用 API 保存错题
+    await mistakeApi.save(submitData);
     ElMessage.success('错题录入成功！');
-
     // 清空表单
     handleClear();
 

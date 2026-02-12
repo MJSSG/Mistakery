@@ -13,7 +13,6 @@
           v-model="localFilters.keyword"
           placeholder="搜索题目内容..."
           clearable
-          @input="onFilterChange"
         >
           <template #prefix>
             <el-icon><Search /></el-icon>
@@ -25,10 +24,9 @@
       <div class="filter-group">
         <div class="filter-label">科目</div>
         <el-select
-          v-model="localFilters.subject"
+          v-model="localFilters.subjectId"
           placeholder="全部科目"
           clearable
-          @change="onFilterChange"
         >
           <el-option label="全部科目" value="" />
           <el-option
@@ -44,10 +42,9 @@
       <div class="filter-group">
         <div class="filter-label">难度</div>
         <el-select
-          v-model="localFilters.difficulty"
+          v-model="localFilters.difficultyLevel"
           placeholder="全部难度"
           clearable
-          @change="onFilterChange"
         >
           <el-option label="全部难度" value="" />
           <el-option label="简单" value="easy" />
@@ -60,10 +57,9 @@
       <div class="filter-group">
         <div class="filter-label">掌握状态</div>
         <el-select
-          v-model="localFilters.status"
+          v-model="localFilters.masteryLevel"
           placeholder="全部状态"
           clearable
-          @change="onFilterChange"
         >
           <el-option label="全部状态" value="" />
           <el-option label="新增" value="new" />
@@ -77,10 +73,9 @@
       <div class="filter-group">
         <div class="filter-label">题型</div>
         <el-select
-          v-model="localFilters.questionType"
+          v-model="localFilters.type"
           placeholder="全部题型"
           clearable
-          @change="onFilterChange"
         >
           <el-option label="全部题型" value="" />
           <el-option label="单选题" value="single" />
@@ -98,7 +93,6 @@
           v-model="localFilters.errorCount"
           placeholder="全部次数"
           clearable
-          @change="onFilterChange"
         >
           <el-option label="全部次数" value="" />
           <el-option label="1次" value="1" />
@@ -115,7 +109,6 @@
           v-model="localFilters.timeRange"
           placeholder="全部时间"
           clearable
-          @change="onFilterChange"
         >
           <el-option label="全部时间" value="" />
           <el-option label="今天" value="today" />
@@ -130,7 +123,6 @@
         <div class="filter-label">排序方式</div>
         <el-select
           v-model="localFilters.sortBy"
-          @change="onFilterChange"
         >
           <el-option label="最近添加" value="recent" />
           <el-option label="错误次数" value="errorCount" />
@@ -148,22 +140,23 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch, computed } from 'vue';
+import { reactive, watch, watchEffect } from 'vue';
 import { Search } from '@element-plus/icons-vue';
 
 export interface MistakeFilters {
   keyword?: string;
-  subject?: string;
-  difficulty?: string;
-  status?: string;
-  questionType?: string;
+  subjectId?: string;
+  type?: string;
+  difficultyLevel?: string;
+  masteryLevel?: string;
   errorCount?: string;
   timeRange?: string;
   sortBy?: string;
+  isFavorite?: boolean;
 }
 
 interface Props {
-  filters: MistakeFilters;
+  modelValue: MistakeFilters;
   totalCount: number;
   subjects: Array<{ value: string; label: string }>;
 }
@@ -171,23 +164,24 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'update:filters': [filters: MistakeFilters];
+  'update:modelValue': [filters: MistakeFilters];
   reset: [];
 }>();
 
-const localFilters = reactive<MistakeFilters>({ ...props.filters });
-
-const onFilterChange = () => {
-  emit('update:filters', { ...localFilters });
-};
-
+// Sync props changes to local filters (for reset functionality)
 watch(
-  () => props.filters,
-  (newFilters) => {
-    Object.assign(localFilters, newFilters);
+  () => props.modelValue,
+  (newValue) => {
+    Object.assign(localFilters, newValue);
   },
-  { deep: true },
+  { deep: true }
 );
+
+// Use computed for proper v-model two-way binding
+const localFilters = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
+});
 </script>
 
 <style scoped lang="scss">

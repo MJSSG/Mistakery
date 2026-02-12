@@ -99,10 +99,6 @@ export class AuthService {
       select: ['id', 'username', 'email', 'nickname', 'avatarUrl', 'createdAt'],
     });
 
-    if (!userInfo) {
-      throw new UnauthorizedException('用户不存在');
-    }
-
     return userInfo;
   }
 

@@ -26,8 +26,11 @@ export const useAuthStore = defineStore('auth', () => {
   // Safely parse localStorage with try-catch
   const getToken = () => {
     try {
-      return localStorage.getItem('token') || '';
+      const token = localStorage.getItem('token') || '';
+      console.log('[Auth Store] getToken from localStorage:', !!token);
+      return token;
     } catch {
+      console.error('[Auth Store] getToken error:', arguments);
       return '';
     }
   };
@@ -35,8 +38,10 @@ export const useAuthStore = defineStore('auth', () => {
   const getUser = (): User | null => {
     try {
       const userStr = localStorage.getItem('user');
+      console.log('[Auth Store] getUser from localStorage:', !!userStr);
       return userStr ? JSON.parse(userStr) : null;
     } catch {
+      console.error('[Auth Store] getUser error:', arguments);
       return null;
     }
   };
@@ -45,7 +50,11 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(getUser());
   const isSidebarCollapsed = ref<boolean>(false); // Default to false
 
-  const isAuthenticated = computed(() => !!token.value);
+  const isAuthenticated = computed(() => {
+    const auth = !!token.value;
+    console.log('[Auth Store] isAuthenticated computed:', auth);
+    return auth;
+  });
   const currentUser = computed(() => user.value || { username: '用户' } as User);
 
   function setAuth(newToken: string, newUser: User) {
@@ -70,7 +79,14 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(credentials: LoginCredentials) {
     try {
       const response = await authApi.login(credentials) as any;
-      setAuth(response.data.token, response.data.user);
+      console.log('[Auth Store] login response:', response);
+      console.log('[Auth Store] response.data:', response.data);
+      // Backend returns { code: 200, data: { user, token } }
+      // Response interceptor returns response.data, so we have { code, data, message }
+      const token = response.data?.token || response.token;
+      const user = response.data?.user || response.user;
+      console.log('[Auth Store] extracted token:', !!token, 'user:', !!user);
+      setAuth(token, user);
       return response;
     } catch (error: any) {
       clearAuth();
@@ -81,7 +97,14 @@ export const useAuthStore = defineStore('auth', () => {
   async function register(credentials: RegisterCredentials) {
     try {
       const response = await authApi.register(credentials) as any;
-      setAuth(response.data.token, response.data.user);
+      console.log('[Auth Store] register response:', response);
+      console.log('[Auth Store] response.data:', response.data);
+      // Backend returns { code: 200, data: { user, token } }
+      // Response interceptor returns response.data, so we have { code, data, message }
+      const token = response.data?.token || response.token;
+      const user = response.data?.user || response.user;
+      console.log('[Auth Store] extracted token:', !!token, 'user:', !!user);
+      setAuth(token, user);
       return response;
     } catch (error: any) {
       throw error;

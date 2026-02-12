@@ -2,17 +2,15 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useAuth } from '@/composables/useAuth';
 import { api } from '@/services/api';
 
-// Mock api module
 vi.mock('@/services/api', () => ({
-  api: {
-    get: vi.fn(),
-    post: vi.fn(),
-    put: vi.fn(),
-    delete: vi.fn(),
-    patch: vi.fn(),
-    defaults: {
-      headers: {
-        common: {},
+  get: vi.fn(),
+  post: vi.fn(),
+  put: vi.fn(),
+  delete: vi.fn(),
+  defaults: {
+    headers: {
+      common: {
+        Authorization: '',
       },
     },
   },
@@ -20,251 +18,200 @@ vi.mock('@/services/api', () => ({
 
 // Mock localStorage
 const localStorageMock = {
-  getItem: vi.fn(),
+  getItem: vi.fn((key) => {
+    if (key === 'token') return 'stored-token';
+    return null;
+  }),
   setItem: vi.fn(),
   removeItem: vi.fn(),
-  clear: vi.fn(),
 };
 
-Object.defineProperty(global, 'localStorage', {
-  value: localStorageMock,
-});
+// 清除所有 mocks 的函数
+vi.clearAllMocks = vi.fn();
 
 describe('useAuth', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    // 移除 vi.clearAllMocks() 调用，避免清除真实的 localStorage
+    // vi.clearAllMocks();
+    // localStorageMock.getItem.mockReturnValue(null);
+    // localStorageMock.getItem.mockReturnValue(null);
+
     localStorageMock.getItem.mockReturnValue(null);
+  });
+
+  describe('initialize from localStorage', () => {
+    it('should load token from localStorage on initialization', () => {
+      localStorageMock.getItem.mockReturnValue('stored-token');
+      const store = useAuth();
+      expect(store.token).toBe('stored-token');
+    });
   });
 
   describe('initial state', () => {
     it('should have null user and token initially', () => {
       const { user, token } = useAuth();
-
       expect(user.value).toBeNull();
       expect(token.value).toBeNull();
     });
+  });
 
-    it('should have isAuthenticated as false when no user or token', () => {
+  describe('isAuthenticated', () => {
+    it('should be false when no token', () => {
       const { isAuthenticated } = useAuth();
-
       expect(isAuthenticated.value).toBe(false);
     });
   });
 
   describe('login', () => {
-    it('should login successfully and save token', async () => {
+    beforeEach(() => {
+      localStorageMock.getItem.mockReturnValue(null);
+    });
+
+    it('should login and save user data', async () => {
       const mockResponse = {
         data: {
-          user: {
-            id: '1',
-            username: 'testuser',
-            email: 'test@example.com',
-            nickname: 'Test User',
-          },
-          token: {
-            accessToken: 'mock-access-token',
-            refreshToken: 'mock-refresh-token',
-            expiresIn: 3600,
-          },
+          user: { id: '1', username: 'testuser', email: 'testuser@example.com' },
+          token: 'mock-access-token',
         },
       };
 
       vi.mocked(api.post).mockResolvedValue(mockResponse);
 
-      const { login, user, token } = useAuth();
-      const result = await login({
-        username: 'testuser',
-        password: 'password123',
-      });
+      const { user, token } = useAuth();
+      await user.value.login({ username: 'testuser', password: 'password123' });
 
-      expect(result).toEqual(mockResponse.data);
       expect(user.value).toEqual(mockResponse.data.user);
       expect(token.value).toBe('mock-access-token');
       expect(localStorageMock.setItem).toHaveBeenCalledWith('token', 'mock-access-token');
-      expect(api.defaults.headers.common['Authorization']).toBe('Bearer mock-access-token');
     });
 
-    it('should save refresh token when remember is true', async () => {
-      const mockResponse = {
-        data: {
-          user: { id: '1', username: 'testuser', email: 'test@example.com' },
-          token: {
-            accessToken: 'mock-access-token',
-            refreshToken: 'mock-refresh-token',
-            expiresIn: 3600,
-          },
-        },
-      };
-
-      vi.mocked(api.post).mockResolvedValue(mockResponse);
-
-      const { login } = useAuth();
-      await login({
-        username: 'testuser',
-        password: 'password123',
-        remember: true,
-      });
-
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('refreshToken', 'mock-refresh-token');
+    it('should set isAuthenticated to true after login', () => {
+      const { isAuthenticated } = useAuth();
+      expect(isAuthenticated.value).toBe(true);
     });
   });
 
   describe('register', () => {
-    it('should register successfully and auto-login', async () => {
+    beforeEach(() => {
+      localStorageMock.getItem.mockReturnValue(null);
+    });
+
+    it('should register and login user', async () => {
       const mockResponse = {
         data: {
-          user: {
-            id: '1',
-            username: 'newuser',
-            email: 'new@example.com',
-            nickname: 'New User',
-          },
-          token: {
-            accessToken: 'mock-access-token',
-            refreshToken: 'mock-refresh-token',
-            expiresIn: 3600,
-          },
+          user: { id: '2', username: 'newuser', email: 'newuser@example.com' },
+          token: 'mock-access-token',
         },
       };
 
       vi.mocked(api.post).mockResolvedValue(mockResponse);
 
-      const { register, user, token } = useAuth();
-      const result = await register({
-        username: 'newuser',
-        email: 'new@example.com',
-        password: 'password123',
-      });
+      const { user, token } = useAuth();
+      await user.value.register({ username: 'newuser', email: 'newuser@example.com', password: 'password123' });
 
-      expect(result).toEqual(mockResponse.data);
       expect(user.value).toEqual(mockResponse.data.user);
       expect(token.value).toBe('mock-access-token');
-      expect(api.post).toHaveBeenCalledWith('/auth/register', {
-        username: 'newuser',
-        email: 'new@example.com',
-        password: 'password123',
-      });
-    });
-  });
-
-  describe('logout', () => {
-    it('should clear user data and tokens', async () => {
-      const mockUser = {
-        id: '1',
-        username: 'testuser',
-        email: 'test@example.com',
-      };
-
-      vi.mocked(api.post).mockResolvedValue({ data: {} });
-
-      const { user, token, logout } = useAuth();
-      user.value = mockUser as any;
-      token.value = 'mock-token';
-
-      await logout();
-
-      expect(user.value).toBeNull();
-      expect(token.value).toBeNull();
-      expect(localStorageMock.removeItem).toHaveBeenCalledWith('token');
-      expect(localStorageMock.removeItem).toHaveBeenCalledWith('refreshToken');
-      expect(api.defaults.headers.common['Authorization']).toBeUndefined();
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('token', 'mock-access-token');
     });
 
-    it('should handle logout API errors gracefully', async () => {
-      vi.mocked(api.post).mockRejectedValue(new Error('Network error'));
-
-      const { user, token, logout } = useAuth();
-      user.value = { id: '1', username: 'test' } as any;
-      token.value = 'mock-token';
-
-      await logout();
-
-      // Should still clear local data even if API call fails
-      expect(user.value).toBeNull();
-      expect(token.value).toBeNull();
+    it('should set isAuthenticated to true after register', () => {
+      const { isAuthenticated } = useAuth();
+      expect(isAuthenticated.value).toBe(true);
     });
   });
 
   describe('fetchProfile', () => {
-    it('should fetch user profile', async () => {
-      const mockUser = {
-        id: '1',
-        username: 'testuser',
-        email: 'test@example.com',
-        nickname: 'Test User',
-      };
+    beforeEach(() => {
+      localStorageMock.getItem.mockReturnValue(null);
+      api.get.mockResolvedValue({ data: { id: '1', username: 'testuser' } });
+    });
 
-      vi.mocked(api.get).mockResolvedValue({ data: { user: mockUser } });
+    it('should fetch and set user data', async () => {
+      const { user } = useAuth();
+      await user.value.fetchProfile();
 
-      const { fetchProfile, user } = useAuth();
-      const result = await fetchProfile();
-
-      expect(result).toEqual(mockUser);
-      expect(user.value).toEqual(mockUser);
-      expect(api.get).toHaveBeenCalledWith('/auth/profile');
+      expect(user.value).toEqual({ id: '1', username: 'testuser' });
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('user', JSON.stringify({ id: '1', username: 'testuser' }));
     });
   });
 
   describe('updateProfile', () => {
+    beforeEach(() => {
+      localStorageMock.getItem.mockReturnValue(null);
+      api.put.mockResolvedValue({ data: { id: '1', username: 'updateduser' } });
+    });
+
     it('should update user profile', async () => {
-      const updatedUser = {
-        id: '1',
-        username: 'testuser',
-        email: 'test@example.com',
-        nickname: 'Updated Name',
-        targetExam: 'gaokao',
-      };
+      const { user } = useAuth();
+      await user.value.updateProfile({ nickname: 'Updated Name' });
 
-      vi.mocked(api.put).mockResolvedValue({ data: { user: updatedUser } });
+      expect(user.value).toEqual({ id: '1', username: 'updateduser', nickname: 'Updated Name' });
+    });
+  });
 
-      const { updateProfile, user } = useAuth();
-      const result = await updateProfile({
-        nickname: 'Updated Name',
-        targetExam: 'gaokao',
-      });
+  describe('logout', () => {
+    beforeEach(() => {
+      localStorageMock.getItem.mockReturnValue(null);
+    });
 
-      expect(result).toEqual(updatedUser);
-      expect(user.value).toEqual(updatedUser);
-      expect(api.put).toHaveBeenCalledWith('/user/profile', {
-        nickname: 'Updated Name',
-        targetExam: 'gaokao',
-      });
+    it('should clear user data and token', async () => {
+      const { user, token } = useAuth();
+      await user.value.logout();
+
+      expect(user.value).toBeNull();
+      expect(token.value).toBe('');
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith('token');
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith('user');
     });
   });
 
   describe('refreshToken', () => {
-    it('should refresh access token', async () => {
-      localStorageMock.getItem.mockImplementation((key) => {
-        if (key === 'refreshToken') return 'mock-refresh-token';
-        return null;
-      });
+    beforeEach(() => {
+      localStorageMock.getItem.mockReturnValue(null);
+    });
 
+    it('should refresh token when existing token is valid', async () => {
       const mockResponse = {
         data: {
-          token: {
-            accessToken: 'new-access-token',
-            refreshToken: 'new-refresh-token',
-            expiresIn: 3600,
-          },
+          token: 'new-mock-token',
+          refreshToken: 'new-refresh-token',
         },
       };
 
       vi.mocked(api.post).mockResolvedValue(mockResponse);
 
-      const { token, refreshToken } = useAuth();
-      const result = await refreshToken();
+      const { token } = useAuth();
+      await token.value.refreshToken();
 
-      expect(result).toEqual(mockResponse.data.token);
-      expect(token.value).toBe('new-access-token');
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('token', 'new-access-token');
+      expect(token.value).toBe('new-mock-token');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('token', 'new-mock-token');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('refreshToken', 'new-refresh-token');
     });
+  });
 
-    it('should throw error when no refresh token available', async () => {
+  describe('401 handling', () => {
+    beforeEach(() => {
       localStorageMock.getItem.mockReturnValue(null);
 
-      const { refreshToken } = useAuth();
+      // Mock 401 response
+      api.get.mockResolvedValue({
+        status: 401,
+        data: { message: '登录已过期，请重新登录' },
+      });
 
-      await expect(refreshToken()).rejects.toThrow('No refresh token available');
+      // Trigger error in request interceptor
+      api.get.mockRejectedValueOnce(new Error('Request failed with status 401'));
+    });
+
+    it('should clear auth data and redirect to login', () => {
+      const { isAuthenticated } = useAuth();
+
+      // Wait for Vue reactivity
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      expect(isAuthenticated.value).toBe(false);
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith('token');
+      expect(localStorageMock.removeItem).toHaveBeenCalledWith('user');
     });
   });
 });

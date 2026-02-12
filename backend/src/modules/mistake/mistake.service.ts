@@ -21,13 +21,35 @@ export class MistakeService {
   }
 
   async create(userId: string, createDto: CreateMistakeDto) {
-    // 验证科目是否存在
-    const subject = await this.subjectRepository.findOne({
+    // 查找或创建科目
+    let subject = await this.subjectRepository.findOne({
       where: { id: createDto.subjectId },
     });
 
     if (!subject) {
-      throw new NotFoundException('科目不存在');
+      // 科目不存在，自动创建默认科目
+      const defaultSubjects = {
+        'politics': { name: '政治理论', icon: '🏛️', color: '#e74c3c' },
+        'general': { name: '常识判断', icon: '🌐', color: '#3498db' },
+        'verbal': { name: '言语理解', icon: '📖', color: '#9b59b6' },
+        'reasoning': { name: '判断推理', icon: '🧩', color: '#1abc9c' },
+        'quant': { name: '数量关系', icon: '🔢', color: '#e67e22' },
+      };
+
+      const defaultSubject = defaultSubjects[createDto.subjectId as keyof typeof defaultSubjects];
+      if (defaultSubject) {
+        subject = this.subjectRepository.create({
+          id: createDto.subjectId,
+          userId,
+          name: defaultSubject.name,
+          icon: defaultSubject.icon,
+          color: defaultSubject.color,
+          mistakeCount: 0,
+        });
+        await this.subjectRepository.save(subject);
+      } else {
+        throw new NotFoundException('科目不存在');
+      }
     }
 
     // 检查是否已存在相同题目
@@ -76,18 +98,42 @@ export class MistakeService {
     const {
       subjectId,
       type,
+      difficultyLevel,
       masteryLevel,
       isFavorite,
       page = 1,
       limit = 20,
       keyword,
+      sortBy = 'recent',
+      errorCount,
+      timeRange,
     } = query;
 
     const queryBuilder = this.mistakeRepository
       .createQueryBuilder('mistake')
       .where('mistake.userId = :userId', { userId })
-      .leftJoinAndSelect('mistake.subject', 'subject')
-      .orderBy('mistake.createdAt', 'DESC');
+      .leftJoinAndSelect('mistake.subject', 'subject');
+
+    // 根据 sortBy 参数设置排序
+    switch (sortBy) {
+      case 'recent':
+        queryBuilder.orderBy('mistake.createdAt', 'DESC');
+        break;
+      case 'oldest':
+        queryBuilder.orderBy('mistake.createdAt', 'ASC');
+        break;
+      case 'difficulty':
+        queryBuilder.orderBy('mistake.difficultyLevel', 'DESC');
+        break;
+      case 'errorCount':
+        queryBuilder.orderBy('mistake.errorCount', 'DESC');
+        break;
+      case 'reviewCount':
+        queryBuilder.orderBy('mistake.reviewCount', 'DESC');
+        break;
+      default:
+        queryBuilder.orderBy('mistake.createdAt', 'DESC');
+    }
 
     if (subjectId) {
       queryBuilder.andWhere('mistake.subjectId = :subjectId', { subjectId });
@@ -95,6 +141,10 @@ export class MistakeService {
 
     if (type) {
       queryBuilder.andWhere('mistake.type = :type', { type });
+    }
+
+    if (difficultyLevel) {
+      queryBuilder.andWhere('mistake.difficultyLevel = :difficultyLevel', { difficultyLevel });
     }
 
     if (masteryLevel) {
@@ -112,12 +162,49 @@ export class MistakeService {
       );
     }
 
+    // 处理错误次数筛选
+    if (errorCount) {
+      if (errorCount === '4+') {
+        queryBuilder.andWhere('mistake.errorCount >= 4');
+      } else {
+        queryBuilder.andWhere('mistake.errorCount = :errorCount', { errorCount });
+      }
+    }
+
+    // 处理时间范围筛选
+    if (timeRange) {
+      const now = new Date();
+      switch (timeRange) {
+        case 'today':
+          queryBuilder.andWhere('mistake.createdAt >= :startDate', {
+            startDate: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+          });
+          break;
+        case '3days':
+          queryBuilder.andWhere('mistake.createdAt >= :startDate', {
+            startDate: new Date(now.setDate(now.getDate() - 3)),
+          });
+          break;
+        case '7days':
+          queryBuilder.andWhere('mistake.createdAt >= :startDate', {
+            startDate: new Date(now.setDate(now.getDate() - 7)),
+          });
+          break;
+        case '30days':
+          queryBuilder.andWhere('mistake.createdAt >= :startDate', {
+            startDate: new Date(now.setDate(now.getDate() - 30)),
+          });
+          break;
+      }
+    }
+
     const [items, total] = await queryBuilder
       .skip((page - 1) * limit)
       .take(limit)
       .getManyAndCount();
 
     return {
+      items: items,
       data: items,
       total,
       page,
