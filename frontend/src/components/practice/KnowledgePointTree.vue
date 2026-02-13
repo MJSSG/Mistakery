@@ -114,6 +114,7 @@ watch(
       treeData.value = [];
       return;
     }
+    const resolvedCategory = category || subjectId;
     loading.value = true;
     try {
       // 获取该科目下的知识点分布
@@ -126,12 +127,12 @@ watch(
         }));
       } else {
         // 否则使用默认知识点树
-        treeData.value = getDefaultKnowledgeTree(category);
+        treeData.value = getDefaultKnowledgeTree(resolvedCategory);
       }
     } catch (error) {
       console.error('Failed to fetch knowledge points:', error);
       // 使用默认知识点树
-      treeData.value = getDefaultKnowledgeTree(category);
+      treeData.value = getDefaultKnowledgeTree(resolvedCategory);
     } finally {
       loading.value = false;
     }

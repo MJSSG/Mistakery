@@ -217,7 +217,7 @@ export const practiceApi = {
 
   // 获取练习记录详情
   getExamRecordById: (id: string) =>
-    get<ExamRecord & { answers: ExamAnswer[] }>(`/practice/exam-record/${id}`),
+    get<ExamResult>(`/practice/exam-record/${id}`),
 
   // 收藏题目
   toggleFavorite: (examRecordId: string, questionId: string) =>
@@ -227,11 +227,5 @@ export const practiceApi = {
   addNote: (examRecordId: string, questionId: string, note: string) =>
     put(`/practice/exam-record/${examRecordId}/answer/${questionId}/note`, { note }),
 
-  // 获取统计数据
-  getStatistics: (params?: { startDate?: string; endDate?: string }) =>
-    get<any>('/practice/statistics', { params }),
-
-  // 获取今日统计
-  getTodayStats: () =>
-    get<any>('/practice/statistics/today'),
+  // 统计相关接口由 analytics 模块提供
 };

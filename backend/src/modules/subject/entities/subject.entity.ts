@@ -26,8 +26,14 @@ export class Subject {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ length: 50, nullable: true, unique: true })
+  code: string;
+
   @Column({ length: 50, nullable: true })
   icon: string;
+
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
   @Column({ type: 'text', nullable: true })
   color: string;
@@ -55,6 +61,9 @@ export class Subject {
 
   @OneToMany(() => Subject, (subject) => subject.parent)
   children: Subject[];
+
+  @OneToMany(() => Mistake, (mistake) => mistake.subject)
+  mistakes: Mistake[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

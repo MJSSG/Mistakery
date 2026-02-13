@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { TrendCharts, ArrowUp, ArrowDown, Document, DataAnalysis, Collection, Clock, User, Trophy } from '@element-plus/icons-vue';
+import { ArrowUp, ArrowDown, Document } from '@element-plus/icons-vue';
 
 interface Props {
   label: string;
@@ -46,17 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'count',
 });
 
-const iconClass = computed(() => {
-  const iconMap: {
-    total: 'Document',
-    correct: 'Trophy',
-    incorrect: 'CloseBold',
-    accuracy: 'DataAnalysis',
-    time: 'Clock',
-    users: 'User',
-  };
-  return iconMap[props.icon as keyof typeof iconMap] || 'Document';
-});
+const iconClass = computed(() => 'stat-icon');
 
 const isPositive = computed(() => props.type === 'correct' || props.type === 'accuracy' || (props.type === 'count' && props.trend > 0) || (props.type === 'time' && props.trend < 0));
 

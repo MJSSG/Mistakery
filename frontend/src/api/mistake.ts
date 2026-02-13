@@ -4,7 +4,7 @@ export interface Mistake {
   id: string;
   userId: string;
   subjectId: string;
-  type: 'choice' | 'fill' | 'essay' | 'other';
+  type: 'choice' | 'choice-multi' | 'fill' | 'judge' | 'essay' | 'other';
   content: string;
   question?: string;
   options?: string;
@@ -27,7 +27,7 @@ export interface Mistake {
 
 export interface CreateMistakeParams {
   subjectId: string;
-  type: 'choice' | 'fill' | 'essay' | 'other';
+  type: 'choice' | 'choice-multi' | 'fill' | 'judge' | 'essay' | 'other';
   content: string;
   question?: string;
   options?: string;

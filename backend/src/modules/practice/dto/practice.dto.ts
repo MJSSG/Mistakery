@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsNumber, IsOptional, IsBoolean, Min, Max, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsOptional, IsBoolean, Min, Max, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 // 筛选配置
@@ -50,7 +50,10 @@ export class CreateExamDto {
   name: string;
 
   @ApiProperty({ description: '筛选配置', type: FilterConfigDto })
-  filterConfig: FilterConfigDto;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => FilterConfigDto)
+  filterConfig?: FilterConfigDto;
 
   @ApiProperty({ description: '题目数量', minimum: 1, maximum: 100 })
   @IsNumber()
@@ -79,6 +82,8 @@ export class GetAvailableCountDto {
 
   @ApiPropertyOptional({ description: '筛选配置', type: FilterConfigDto })
   @IsOptional()
+  @ValidateNested()
+  @Type(() => FilterConfigDto)
   filterConfig?: FilterConfigDto;
 }
 

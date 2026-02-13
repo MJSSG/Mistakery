@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Check } from '@element-plus/icons-vue';
+import { CircleCheck } from '@element-plus/icons-vue';
 import { useSubjectStore } from '@/stores/subject';
 
 interface Subject {

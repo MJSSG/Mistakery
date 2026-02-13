@@ -1,0 +1,26 @@
+{
+  "name": "mistakery",
+  "version": "1.0.0",
+  "description": "Mistakery 是一个基于 Vue 3 + NestJS 的错题追踪和学习优化平台，采用高顿教育橙色主题风格，提供结构化错题录入、智能组卷、间隔重复复习等功能。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MJSSG/Mistakery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MJSSG/Mistakery/issues"
+  },
+  "homepage": "https://github.com/MJSSG/Mistakery#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3"
+  }
+}

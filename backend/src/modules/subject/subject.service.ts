@@ -12,6 +12,9 @@ export class SubjectService {
   ) {}
 
   async findAll(userId: string) {
+    // 确保默认科目已初始化
+    await this.seedDefaultSubjects();
+
     // 获取用户的科目和公共科目
     const [userSubjects, publicSubjects] = await Promise.all([
       this.subjectRepository.find({
@@ -114,5 +117,85 @@ export class SubjectService {
 
     await this.subjectRepository.remove(subject);
     return { success: true };
+  }
+
+  /**
+   * 初始化默认公共科目
+   */
+  async seedDefaultSubjects() {
+    // 检查是否已有默认科目
+    const existing = await this.subjectRepository.findOne({
+      where: { code: 'politics', userId: null },
+    });
+
+    if (existing) {
+      return; // 已初始化过
+    }
+
+    // 创建默认科目
+    const defaultSubjects = [
+      {
+        id: 'politics',
+        userId: null,
+        code: 'politics',
+        name: '政治理论',
+        icon: '🏛️',
+        color: '#e74c3c',
+        isPublic: true,
+        mistakeCount: 0,
+        sortOrder: 1,
+        category: 'politics',
+      },
+      {
+        id: 'general',
+        userId: null,
+        code: 'general',
+        name: '常识判断',
+        icon: '🌐',
+        color: '#3498db',
+        isPublic: true,
+        mistakeCount: 0,
+        sortOrder: 2,
+        category: 'general',
+      },
+      {
+        id: 'verbal',
+        userId: null,
+        code: 'verbal',
+        name: '言语理解',
+        icon: '📖',
+        color: '#9b59b6',
+        isPublic: true,
+        mistakeCount: 0,
+        sortOrder: 3,
+        category: 'verbal',
+      },
+      {
+        id: 'reasoning',
+        userId: null,
+        code: 'reasoning',
+        name: '判断推理',
+        icon: '🧩',
+        color: '#1abc9c',
+        isPublic: true,
+        mistakeCount: 0,
+        sortOrder: 4,
+        category: 'reasoning',
+      },
+      {
+        id: 'quantitative',
+        userId: null,
+        code: 'quantitative',
+        name: '数量关系',
+        icon: '🔢',
+        color: '#e67e22',
+        isPublic: true,
+        mistakeCount: 0,
+        sortOrder: 5,
+        category: 'quantitative',
+      },
+    ];
+
+    await this.subjectRepository.save(defaultSubjects);
   }
 }

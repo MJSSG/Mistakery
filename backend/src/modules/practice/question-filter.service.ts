@@ -92,7 +92,7 @@ export class QuestionFilterService {
 
     // 知识点筛选
     if (filterConfig?.knowledgePoints && filterConfig.knowledgePoints.length > 0) {
-      queryBuilder.andWhere('mistake.knowledgePoints && :knowledgePoints', {
+      queryBuilder.andWhere('JSON_OVERLAPS(mistake.knowledgePoints, :knowledgePoints)', {
         knowledgePoints: JSON.stringify(filterConfig.knowledgePoints),
       });
     }

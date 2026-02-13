@@ -35,6 +35,9 @@ export const subjectApi = {
   // 获取科目列表
   getList: () => get<Subject[]>('/subjects'),
 
+  // 获取默认科目列表
+  getDefault: () => get<Subject[]>('/subjects/default'),
+
   // 获取科目详情
   getById: (id: string) => get<Subject>(`/subjects/${id}`),
 
