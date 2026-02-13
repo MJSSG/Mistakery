@@ -36,7 +36,7 @@ def get_modelscope_remaining_quota(api_key, model_name):
 
 # 替换为你的API-KEY和模型名
 API_KEY = "ms-7d727c42-3300-4fdc-8083-b94c7b7dfea1"
-MODEL_NAME = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+MODEL_NAME = "Shanghai_AI_Laboratory/Intern-S1-Pro"
 
 # 调用函数并打印结果
 quota = get_modelscope_remaining_quota(API_KEY, MODEL_NAME)

@@ -105,7 +105,6 @@ export class MistakeService {
       limit = 20,
       keyword,
       sortBy = 'recent',
-      errorCount,
       timeRange,
     } = query;
 
@@ -124,9 +123,6 @@ export class MistakeService {
         break;
       case 'difficulty':
         queryBuilder.orderBy('mistake.difficultyLevel', 'DESC');
-        break;
-      case 'errorCount':
-        queryBuilder.orderBy('mistake.errorCount', 'DESC');
         break;
       case 'reviewCount':
         queryBuilder.orderBy('mistake.reviewCount', 'DESC');
@@ -160,15 +156,6 @@ export class MistakeService {
         '(mistake.content LIKE :keyword OR mistake.question LIKE :keyword)',
         { keyword: `%${keyword}%` },
       );
-    }
-
-    // 处理错误次数筛选
-    if (errorCount) {
-      if (errorCount === '4+') {
-        queryBuilder.andWhere('mistake.errorCount >= 4');
-      } else {
-        queryBuilder.andWhere('mistake.errorCount = :errorCount', { errorCount });
-      }
     }
 
     // 处理时间范围筛选

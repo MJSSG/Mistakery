@@ -76,10 +76,6 @@
       <div class="card-footer">
         <div class="footer-stats">
           <div class="stat-item">
-            <el-icon><RefreshRight /></el-icon>
-            <span>错误 {{ mistake.errorCount }} 次</span>
-          </div>
-          <div class="stat-item">
             <el-icon><View /></el-icon>
             <span>复习 {{ mistake.reviewCount }} 次</span>
           </div>
@@ -101,7 +97,6 @@ import {
   Delete,
   Download,
   Document,
-  RefreshRight,
   View,
   Clock,
   Memo,
@@ -117,7 +112,6 @@ export interface MistakeData {
   difficulty: 'easy' | 'medium' | 'hard';
   myAnswer?: string;
   correctAnswer: string;
-  errorCount: number;
   reviewCount: number;
   reviewStatus?: 'new' | 'reviewing' | 'reviewed' | 'mastered';
   note?: string;

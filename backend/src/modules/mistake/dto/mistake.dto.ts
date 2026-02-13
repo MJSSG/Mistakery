@@ -151,15 +151,10 @@ export class QueryMistakeDto {
   @IsOptional()
   keyword?: string;
 
-  @ApiProperty({ description: '排序方式', required: false, enum: ['recent', 'oldest', 'difficulty', 'errorCount', 'reviewCount'] })
+  @ApiProperty({ description: '排序方式', required: false, enum: ['recent', 'oldest', 'difficulty', 'reviewCount'] })
   @IsString()
   @IsOptional()
-  sortBy?: 'recent' | 'oldest' | 'difficulty' | 'errorCount' | 'reviewCount';
-
-  @ApiProperty({ description: '错误次数', required: false })
-  @IsString()
-  @IsOptional()
-  errorCount?: string;
+  sortBy?: 'recent' | 'oldest' | 'difficulty' | 'reviewCount';
 
   @ApiProperty({ description: '时间范围', required: false })
   @IsString()

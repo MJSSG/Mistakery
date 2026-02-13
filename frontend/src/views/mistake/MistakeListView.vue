@@ -147,11 +147,7 @@ const filters = reactive<MistakeFilters>({
   keyword: '',
   sortBy: 'recent',
   subjectId: '',
-  type: '',
   difficultyLevel: '',
-  masteryLevel: '',
-  errorCount: '',
-  timeRange: '',
 });
 
 // 监听 filters 变化，自动触发数据获取
@@ -198,11 +194,7 @@ const fetchData = async () => {
     if (filters.sortBy) params.sortBy = filters.sortBy;
     if (filters.keyword) params.keyword = filters.keyword;
     if (filters.subjectId) params.subjectId = filters.subjectId;
-    if (filters.type) params.type = filters.type;
     if (filters.difficultyLevel) params.difficultyLevel = filters.difficultyLevel;
-    if (filters.masteryLevel) params.masteryLevel = filters.masteryLevel;
-    if (filters.errorCount) params.errorCount = filters.errorCount;
-    if (filters.timeRange) params.timeRange = filters.timeRange;
 
     const response = await mistakeStore.fetchMistakes(params);
 
@@ -219,7 +211,6 @@ const fetchData = async () => {
       difficulty: item.difficultyLevel,
       myAnswer: item.userAnswer,
       correctAnswer: item.answer,
-      errorCount: item.errorCount || 1,
       reviewCount: item.reviewCount || 0,
       reviewStatus: item.reviewStatus || 'new',
       note: item.note,
@@ -268,11 +259,7 @@ const handleResetFilters = () => {
   Object.assign(filters, {
     keyword: '',
     subjectId: '',
-    type: '',
     difficultyLevel: '',
-    masteryLevel: '',
-    errorCount: '',
-    timeRange: '',
     sortBy: 'recent',
   });
   pagination.page = 1;
