@@ -314,8 +314,11 @@ const handleConfirm = async () => {
     return;
   }
 
-  // 更新 formData 用于提交
-  const submitData = { ...formData };
+  // 准备数据用于提交，确保使用正确的 subjectId
+  const submitData = {
+    ...formData,
+    subjectId: subjectIdToSubmit
+  };
   try {
     // 调用 API 保存错题
     await mistakeApi.save(submitData);
