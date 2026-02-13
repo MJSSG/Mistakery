@@ -10,7 +10,8 @@ export const useSubjectStore = defineStore('subject', () => {
   async function fetchSubjects() {
     loading.value = true;
     try {
-      subjects.value = await subjectApi.getList();
+      const response = await subjectApi.getList() as any;
+      subjects.value = response.data || [];
     } catch (error) {
       console.error('Failed to fetch subjects:', error);
       // 使用默认科目（公务员考试分类）
@@ -60,7 +61,8 @@ export const useSubjectStore = defineStore('subject', () => {
   async function fetchSubjectById(id: string) {
     loading.value = true;
     try {
-      currentSubject.value = await subjectApi.getById(id);
+      const response = await subjectApi.getById(id) as any;
+      currentSubject.value = response.data;
     } finally {
       loading.value = false;
     }
@@ -69,8 +71,8 @@ export const useSubjectStore = defineStore('subject', () => {
   async function createSubject(data: Partial<Subject>) {
     loading.value = true;
     try {
-      const response = await subjectApi.create(data as any);
-      subjects.value.push(response);
+      const response = await subjectApi.create(data as any) as any;
+      subjects.value.push(response.data);
       return response;
     } finally {
       loading.value = false;
@@ -80,12 +82,12 @@ export const useSubjectStore = defineStore('subject', () => {
   async function updateSubject(id: string, data: Partial<Subject>) {
     loading.value = true;
     try {
-      const response = await subjectApi.update(id, data as any);
+      const response = await subjectApi.update(id, data as any) as any;
       const index = subjects.value.findIndex(s => s.id === id);
       if (index !== -1) {
-        subjects.value[index] = response;
+        subjects.value[index] = response.data;
       }
-      return response;
+      return response.data;
     } finally {
       loading.value = false;
     }

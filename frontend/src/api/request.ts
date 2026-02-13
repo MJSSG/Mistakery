@@ -13,7 +13,7 @@ const service: any = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('mistakery_token');
     if (token) {
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
@@ -44,8 +44,8 @@ service.interceptors.response.use(
       switch (response.status) {
         case 401:
           ElMessage.error('登录已过期，请重新登录');
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          localStorage.removeItem('mistakery_token');
+          localStorage.removeItem('mistakery_user');
           window.location.href = '/login';
           break;
         case 403:

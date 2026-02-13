@@ -102,10 +102,14 @@ export interface CreateExamDto {
 // 获取可用题目数量参数
 export interface GetAvailableCountParams {
   subjectId: string;
-  knowledgePoints?: string[];
-  type?: QuestionType;
-  difficulty?: DifficultyLevel;
-  masteryLevel?: MasteryLevel;
+  filterConfig?: {
+    knowledgePoints?: string[];
+    type?: QuestionType;
+    difficulty?: DifficultyLevel;
+    masteryLevel?: MasteryLevel;
+    includeMastered?: boolean;
+    excludeIds?: string[];
+  };
 }
 
 // 开始练习参数
@@ -163,7 +167,7 @@ export interface ExamResult {
 export const practiceApi = {
   // 获取可用题目数量
   getAvailableCount: (params: GetAvailableCountParams) =>
-    get<{ count: number }>('/practice/available-count', { params }),
+    post<{ count: number }>('/practice/available-count', params),
 
   // 创建试卷（智能组卷）
   createExam: (data: CreateExamDto) =>

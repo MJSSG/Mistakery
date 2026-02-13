@@ -35,14 +35,14 @@ interface AuthResponse {
  */
 export function useAuth() {
   const user = ref<User | null>(null);
-  const token = ref<string | null>(localStorage.getItem('token'));
+  const token = ref<string | null>(localStorage.getItem('mistakery_token'));
   const isAuthenticated = computed(() => !!user.value && !!token.value);
 
   /**
    * 初始化认证状态
    */
   async function initialize() {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = localStorage.getItem('mistakery_token');
     if (storedToken) {
       token.value = storedToken;
       try {
@@ -62,7 +62,7 @@ export function useAuth() {
 
     // 保存 token
     token.value = response.data.token;
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('mistakery_token', response.data.token);
 
     // 保存用户信息
     user.value = response.data.user;
@@ -81,7 +81,7 @@ export function useAuth() {
 
     // 注册成功后自动登录
     token.value = response.data.token;
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('mistakery_token', response.data.token);
 
     user.value = response.data.user;
 
@@ -104,7 +104,7 @@ export function useAuth() {
       // 清除本地存储
       user.value = null;
       token.value = null;
-      localStorage.removeItem('token');
+      localStorage.removeItem('mistakery_token');
       delete api.defaults.headers.common['Authorization'];
     }
   }
@@ -181,7 +181,7 @@ export function useAuth() {
    * 刷新 token
    */
   async function refreshToken() {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = localStorage.getItem('mistakery_token');
     if (!storedToken) {
       throw new Error('No token available');
     }
@@ -191,7 +191,7 @@ export function useAuth() {
     });
 
     token.value = response.data.token;
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('mistakery_token', response.data.token);
 
     // 设置 axios 默认 token
     api.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;

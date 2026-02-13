@@ -41,6 +41,12 @@ export class MistakeController {
     return this.mistakeService.getStatsOverview(req.user.sub);
   }
 
+  @Get('stats/subject/:subjectId')
+  @ApiOperation({ summary: '获取科目知识点统计' })
+  async getStatsBySubject(@Request() req, @Param('subjectId') subjectId: string) {
+    return this.mistakeService.getStatsBySubject(req.user.sub, subjectId);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: '获取错题详情' })
   async findOne(@Param('id') id: string) {

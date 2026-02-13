@@ -17,7 +17,7 @@ export class Subject {
   id: string;
 
   @Column({ name: 'user_id', nullable: true })
-  userId: string;
+  userId: string | null;
 
   @ManyToOne(() => User, { onDelete: 'CASCADE', nullable: true })
   @JoinColumn({ name: 'user_id' })
@@ -29,11 +29,8 @@ export class Subject {
   @Column({ length: 50, nullable: true })
   icon: string;
 
-  @Column({ length: 20, nullable: true })
-  color: string;
-
   @Column({ type: 'text', nullable: true })
-  description: string;
+  color: string;
 
   @Column({ name: 'is_public', type: 'boolean', default: false })
   isPublic: boolean;
@@ -43,6 +40,10 @@ export class Subject {
 
   @Column({ name: 'sort_order', type: 'int', default: 0 })
   sortOrder: number;
+
+  // 科目分类：politics(政治理论)、general(常识判断)、verbal(言语理解)、reasoning(判断推理)、quantitative(数量关系)
+  @Column({ name: 'category', nullable: true })
+  category: string;
 
   // 父科目ID，用于层级分类
   @Column({ name: 'parent_id', nullable: true })
@@ -54,9 +55,6 @@ export class Subject {
 
   @OneToMany(() => Subject, (subject) => subject.parent)
   children: Subject[];
-
-  @OneToMany(() => Mistake, (mistake) => mistake.subject)
-  mistakes: Mistake[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

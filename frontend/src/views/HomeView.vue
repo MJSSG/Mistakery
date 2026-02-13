@@ -124,7 +124,7 @@ const features = [
 
 const navigateToFeature = (path: string) => {
   // 检查是否已登录
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('mistakery_token');
   if (!token) {
     ElMessage.warning('请先登录');
     router.push('/login');

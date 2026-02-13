@@ -43,9 +43,10 @@ const toggleSidebar = () => {
 
 .main-content {
   flex: 1;
+  flex-shrink: 0;
+  overflow-y: auto;
   margin-left: var(--sidebar-width);
   padding: var(--spacing-xl);
-  min-height: calc(100vh - var(--header-height) - var(--footer-height));
   background: var(--color-background);
 
   .main-layout.is-collapsed & {

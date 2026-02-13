@@ -222,7 +222,7 @@ const {
 // 上传配置
 const uploadUrl = computed(() => `${(import.meta as any).env?.VITE_API_BASE_URL || '/api'}/user/avatar`);
 const uploadHeaders = computed(() => ({
-  Authorization: `Bearer ${localStorage.getItem('token')}`,
+  Authorization: `Bearer ${localStorage.getItem('mistakery_token')}`,
 }));
 
 // 表单

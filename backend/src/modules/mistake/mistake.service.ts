@@ -339,4 +339,36 @@ export class MistakeService {
       })),
     };
   }
+
+  async getStatsBySubject(userId: string, subjectId: string) {
+    // 获取该科目下所有错题的知识点分布
+    const mistakes = await this.mistakeRepository
+      .createQueryBuilder('mistake')
+      .select('mistake.knowledgePoints', 'knowledgePoints')
+      .where('mistake.userId = :userId', { userId })
+      .andWhere('mistake.subjectId = :subjectId', { subjectId })
+      .getMany();
+
+    // 统计知识点
+    const knowledgePointMap = new Map<string, number>();
+
+    mistakes.forEach((mistake) => {
+      const points = mistake.knowledgePoints || [];
+      points.forEach((point) => {
+        const current = knowledgePointMap.get(point) || 0;
+        knowledgePointMap.set(point, current + 1);
+      });
+    });
+
+    // 转换为数组格式
+    const knowledgePoints = Array.from(knowledgePointMap.entries()).map(([name, count]) => ({
+      name,
+      count,
+    }));
+
+    return {
+      subjectId,
+      knowledgePoints,
+    };
+  }
 }

@@ -11,6 +11,7 @@
         <KnowledgePointTree
           v-model="formData.knowledgePoints"
           :subject-id="formData.subjectId"
+          :category="selectedCategory"
           placeholder="选择知识点，不选则包含所有知识点"
         />
       </el-form-item>
@@ -95,10 +96,11 @@
 import { ref, reactive, computed, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import CategorySelector from '@/components/mistake/CategorySelector.vue';
-import KnowledgePointTree from './KnowledgePointTree.vue';
+import KnowledgePointTree from '@/components/practice/KnowledgePointTree.vue';
 import FilterOptions from './FilterOptions.vue';
 import CountSelector from './CountSelector.vue';
 import { practiceApi } from '@/api/practice';
+import { useSubjectStore } from '@/stores/subject';
 
 export interface ExamConfig {
   subjectId: string;
@@ -117,6 +119,8 @@ const emit = defineEmits<{
   (e: 'generated', examId: string): void;
   (e: 'cancel'): void;
 }>();
+
+const subjectStore = useSubjectStore();
 
 const formRef = ref();
 const generating = ref(false);
@@ -160,6 +164,20 @@ const formRules = {
 
 const canGenerate = computed(() => {
   return formData.subjectId && formData.questionCount > 0 && formData.name;
+});
+
+// 根据选中的科目获取分类
+const selectedCategory = computed(() => {
+  if (!formData.subjectId) return undefined;
+
+  const subject = subjectStore.subjects.find(s => s.id === formData.subjectId);
+  if (subject) {
+    // 如果科目有父ID，则使用父ID作为分类；否则使用自己的ID
+    return subject.parentId || subject.id;
+  }
+
+  // 如果在store中没找到，直接使用subjectId作为category
+  return formData.subjectId;
 });
 
 // 自动生成练习名称
@@ -209,10 +227,12 @@ const updateAvailableCount = async () => {
   try {
     const response = await practiceApi.getAvailableCount({
       subjectId: formData.subjectId,
-      knowledgePoints: formData.knowledgePoints,
-      type: formData.type,
-      difficulty: formData.difficulty,
-      masteryLevel: formData.masteryLevel,
+      filterConfig: {
+        knowledgePoints: formData.knowledgePoints,
+        type: formData.type,
+        difficulty: formData.difficulty,
+        masteryLevel: formData.masteryLevel,
+      },
     });
     availableCount.value = response.count;
   } catch (error) {

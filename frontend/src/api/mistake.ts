@@ -99,4 +99,9 @@ export const mistakeApi = {
 
   // 批量删除
   batchDelete: (ids: string[]) => post('/mistake/batch-delete', { ids }),
+
+  // 获取科目知识点统计
+  getStatsBySubject: (subjectId: string) => {
+    return get<any>(`/mistake/stats/subject/${subjectId}`);
+  },
 };

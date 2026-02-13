@@ -101,6 +101,7 @@ declare module 'vue' {
     SubCategorySelector: typeof import('./src/components/mistake/SubCategorySelector.vue')['default']
     SubjectBarChart: typeof import('./src/components/statistics/SubjectBarChart.vue')['default']
     SubjectStatCard: typeof import('./src/components/result/SubjectStatCard.vue')['default']
+    Temp: typeof import('./src/components/mistake/temp.vue')['default']
     TimeChart: typeof import('./src/components/result/TimeChart.vue')['default']
     Timer: typeof import('./src/components/practice/Timer.vue')['default']
     TimeRangeSelector: typeof import('./src/components/statistics/TimeRangeSelector.vue')['default']

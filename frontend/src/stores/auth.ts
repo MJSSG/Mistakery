@@ -26,7 +26,7 @@ export const useAuthStore = defineStore('auth', () => {
   // Safely parse localStorage with try-catch
   const getToken = () => {
     try {
-      const token = localStorage.getItem('token') || '';
+      const token = localStorage.getItem('mistakery_token') || '';
       console.log('[Auth Store] getToken from localStorage:', !!token);
       return token;
     } catch {
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const getUser = (): User | null => {
     try {
-      const userStr = localStorage.getItem('user');
+      const userStr = localStorage.getItem('mistakery_user');
       console.log('[Auth Store] getUser from localStorage:', !!userStr);
       return userStr ? JSON.parse(userStr) : null;
     } catch {
@@ -60,15 +60,15 @@ export const useAuthStore = defineStore('auth', () => {
   function setAuth(newToken: string, newUser: User) {
     token.value = newToken;
     user.value = newUser;
-    localStorage.setItem('token', newToken);
-    localStorage.setItem('user', JSON.stringify(newUser));
+    localStorage.setItem('mistakery_token', newToken);
+    localStorage.setItem('mistakery_user', JSON.stringify(newUser));
   }
 
   function clearAuth() {
     token.value = '';
     user.value = null;
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('mistakery_token');
+    localStorage.removeItem('mistakery_user');
   }
 
   function toggleSidebar() {
@@ -120,7 +120,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const response = await authApi.getProfile();
       user.value = response;
-      localStorage.setItem('user', JSON.stringify(response));
+      localStorage.setItem('mistakery_user', JSON.stringify(response));
       return response;
     } catch (error: any) {
       throw error;

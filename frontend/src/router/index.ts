@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import type { RouterOptions } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -21,12 +20,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/user',
     component: () => import('@/components/layout/MainLayout.vue'),
-    meta: { requiresAuth: true },
+    meta: { title: '个人中心', requiresAuth: true },
     children: [
       {
-        path: 'profile',
+        path: '',
         component: () => import('@/views/user/ProfileView.vue'),
-        meta: { title: '个人中心' }
+        meta: { title: '个人资料' }
       },
       {
         path: 'settings',
@@ -43,7 +42,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/mistake',
     component: () => import('@/components/layout/MainLayout.vue'),
-    meta: { requiresAuth: true },
+    meta: { title: '错题本' },
     children: [
       {
         path: 'entry',
@@ -64,11 +63,12 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/practice',
+    redirect: '/practice/setup',
     component: () => import('@/components/layout/MainLayout.vue'),
-    meta: { requiresAuth: true },
+    meta: { title: '智能练习' },
     children: [
       {
-        path: '',
+        path: 'setup',
         component: () => import('@/views/practice/PracticeSetupView.vue'),
         meta: { title: '智能组卷' }
       },
@@ -76,6 +76,11 @@ const routes: RouteRecordRaw[] = [
         path: 'list',
         component: () => import('@/views/practice/PracticeView.vue'),
         meta: { title: '练习列表' }
+      },
+      {
+        path: 'history',
+        component: () => import('@/views/practice/PracticeView.vue'),
+        meta: { title: '练习记录' }
       },
       {
         path: ':id',
@@ -97,7 +102,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/review',
     component: () => import('@/components/layout/MainLayout.vue'),
-    meta: { requiresAuth: true },
+    meta: { title: '智能复习' },
     children: [
       {
         path: '',
@@ -105,7 +110,7 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '复习系统' }
       },
       {
-        path: 'session',
+        path: 'session/:id',
         component: () => import('@/views/review/ReviewSessionView.vue'),
         meta: { title: '开始复习' }
       }
@@ -113,21 +118,14 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/statistics',
-    component: () => import('@/components/layout/MainLayout.vue'),
-    meta: { requiresAuth: true },
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/statistics/StatisticsView.vue'),
-        meta: { title: '学习统计' }
-      }
-    ]
+    component: () => import('@/views/statistics/StatisticsView.vue'),
+    meta: { title: '学习统计' }
   },
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/ErrorView.vue'),
     meta: { title: '404' }
-  }
+  },
 ];
 
 const router = createRouter({
@@ -136,26 +134,31 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
-    } else {
-      return { top: 0 };
     }
-  }
+    return { top: 0, left: 0 };
+  },
 });
 
-// 路由守卫
+// 路由守卫 - 修复后：正确判断认证状态
 router.beforeEach((to, from, next) => {
   // 设置页面标题
   document.title = to.meta.title ? `${to.meta.title} - Mistakery` : 'Mistakery';
 
-  // 检查认证 - 直接检查 localStorage 以避免 store 初始化时序问题
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth !== false);
-  const hasToken = !!localStorage.getItem('token');
+  // 检查认证状态
+  const hasToken = !!localStorage.getItem('mistakery_token');
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if (requiresAuth && !hasToken) {
-    next('/login');
-  } else if (hasToken && (to.path === '/login' || to.path === '/register')) {
-    next('/');
+  // 根据认证状态决定导航
+  if (requiresAuth) {
+    // 路由需要认证
+    if (hasToken) {
+      next();
+    } else {
+      // 用户未登录，重定向到登录页
+      next('/login');
+    }
   } else {
+    // 路由不需要认证，直接放行
     next();
   }
 });

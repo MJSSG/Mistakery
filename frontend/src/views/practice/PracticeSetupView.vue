@@ -145,16 +145,27 @@ import {
 } from '@element-plus/icons-vue';
 import ExamSetup from '@/components/practice/ExamSetup.vue';
 import { usePracticeStore } from '@/stores/practice';
+import { useSubjectStore } from '@/stores/subject';
 
 const router = useRouter();
 const practiceStore = usePracticeStore();
+const subjectStore = useSubjectStore();
 
 const examCount = ref(0);
 const recentExams = ref<any[]>([]);
 
 onMounted(async () => {
+  await fetchSubjects();
   await fetchRecentExams();
 });
+
+const fetchSubjects = async () => {
+  try {
+    await subjectStore.fetchSubjects();
+  } catch (error) {
+    console.error('Failed to fetch subjects:', error);
+  }
+};
 
 const fetchRecentExams = async () => {
   try {
