@@ -82,7 +82,9 @@ export const useMistakeStore = defineStore('mistake', () => {
     loading.value = true;
     try {
       await Promise.all(ids.map(id => mistakeApi.delete(id)));
-      mistakes.value = mistakes.value.filter(m => !ids.includes(m.id));
+      // 从mistakes数组中移除已删除的错题
+      const idsSet = new Set(ids);
+      mistakes.value = mistakes.value.filter(m => !idsSet.has(m.id));
     } finally {
       loading.value = false;
     }

@@ -296,10 +296,15 @@ const handleBatchDelete = async () => {
       { type: 'warning' }
     );
 
-    await mistakeStore.batchDelete(Array.from(selectedIds.value));
+    const idsToDelete = Array.from(selectedIds.value);
+    await mistakeStore.batchDelete(idsToDelete);
+
+    // 从本地列表中移除已删除的错题
+    mistakes.value = mistakes.value.filter(m => !idsToDelete.includes(m.id));
+
     selectedIds.value.clear();
+    deletedIds.value.clear(); // 清空已删除ID集合
     ElMessage.success('删除成功');
-    fetchData();
   } catch (error: any) {
     if (error !== 'cancel') {
       ElMessage.error(error.message || '删除失败');
