@@ -100,6 +100,7 @@ import { useRoute, useRouter } from 'vue-router';
 import MainLayout from '@/components/layout/MainLayout.vue';
 import { CircleCheck, CircleClose } from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
+import mistakeService from '@/services/mistake.service';
 
 const route = useRoute();
 const router = useRouter();
@@ -109,9 +110,7 @@ const loading = ref(false);
 const loadMistake = async () => {
   loading.value = true;
   try {
-    // TODO: 调用 API 获取错题详情
-    // const { data } = await mistakeApi.getMistakeDetail(route.params.id);
-    // mistake.value = data;
+    mistake.value = await mistakeService.getMistakeDetail(route.params.id as string);
   } catch (error) {
     console.error('加载错题详情失败:', error);
   } finally {
