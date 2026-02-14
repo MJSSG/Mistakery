@@ -1,103 +1,99 @@
 <template>
-  <MainLayout>
-    <div class="mistake-detail">
-      <el-page-header @back="goBack" title="返回">
-        <template #content>
-          <span class="page-title">错题详情</span>
-        </template>
-      </el-page-header>
+  <div class="mistake-detail">
+    <el-page-header @back="goBack" title="返回">
+      <template #content>
+        <span class="page-title">错题详情</span>
+      </template>
+    </el-page-header>
 
-      <el-card v-loading="loading" class="detail-card">
-        <template v-if="mistake">
-          <!-- 题目内容 -->
-          <div class="question-content">
-            <div class="meta-info">
-              <el-tag :type="getTypeTag(mistake.type)">
-                {{ getTypeLabel(mistake.type) }}
-              </el-tag>
-              <el-tag :type="getDifficultyTag(mistake.difficultyLevel)">
-                {{ getDifficultyLabel(mistake.difficultyLevel) }}
-              </el-tag>
-              <el-tag>{{ mistake.subject?.name || getSubjectLabel(mistake.subjectId) }}</el-tag>
-            </div>
+    <el-card v-loading="loading" class="detail-card" v-if="mistake">
+      <!-- 题目内容 -->
+      <div class="question-content">
+        <div class="meta-info">
+          <el-tag :type="getTypeTag(mistake.type)">
+            {{ getTypeLabel(mistake.type) }}
+          </el-tag>
+          <el-tag :type="getDifficultyTag(mistake.difficultyLevel)">
+            {{ getDifficultyLabel(mistake.difficultyLevel) }}
+          </el-tag>
+          <el-tag>{{ mistake.subject?.name || getSubjectLabel(mistake.subjectId) }}</el-tag>
+        </div>
 
-            <h3 class="question-text">{{ mistake.question || mistake.content }}</h3>
+        <h3 class="question-text">{{ mistake.question || mistake.content }}</h3>
 
-            <!-- 选项 -->
-            <div v-if="mistake.options" class="options">
-              <div
-                v-for="(option, key) in parseOptions"
-                :key="key"
-                class="option-item"
-                :class="{
-                  'is-correct': mistake.answer?.includes(key),
-                  'is-wrong': mistake.userAnswer?.includes(key) && !mistake.answer?.includes(key)
-                }"
-              >
-                <span class="option-key">{{ key }}.</span>
-                <span class="option-value">{{ option }}</span>
-                <el-icon v-if="mistake.answer?.includes(key)" class="icon-correct">
-                  <CircleCheck />
-                </el-icon>
-                <el-icon v-if="mistake.userAnswer?.includes(key) && !mistake.answer?.includes(key)" class="icon-wrong">
-                  <CircleClose />
-                </el-icon>
-              </div>
-            </div>
-
-            <!-- 答案对比 -->
-            <div class="answer-comparison">
-              <div class="answer-item">
-                <span class="label">我的答案：</span>
-                <el-tag type="danger">{{ mistake.userAnswer || '未作答' }}</el-tag>
-              </div>
-              <div class="answer-item">
-                <span class="label">正确答案：</span>
-                <el-tag type="success">{{ mistake.answer }}</el-tag>
-              </div>
-            </div>
-
-            <!-- 解析 -->
-            <div v-if="mistake.analysis" class="explanation">
-              <h4>解析</h4>
-              <p>{{ mistake.analysis }}</p>
-            </div>
-
-            <!-- 错误信息 -->
-            <div class="mistake-info">
-              <el-descriptions :column="2" border>
-                <el-descriptions-item label="错误次数">{{ mistake.reviewCount }}</el-descriptions-item>
-                <el-descriptions-item label="掌握状态">
-                  <el-tag :type="getStatusTag(mistake.masteryLevel)">
-                    {{ getStatusLabel(mistake.masteryLevel) }}
-                  </el-tag>
-                </el-descriptions-item>
-                <el-descriptions-item label="下次复习">{{ formatDate(mistake.nextReviewAt) }}</el-descriptions-item>
-                <el-descriptions-item label="记录时间">{{ formatDate(mistake.createdAt) }}</el-descriptions-item>
-              </el-descriptions>
-            </div>
+        <!-- 选项 -->
+        <div v-if="mistake.options" class="options">
+          <div
+            v-for="(option, key) in parseOptions"
+            :key="key"
+            class="option-item"
+            :class="{
+              'is-correct': mistake.answer?.includes(key),
+              'is-wrong': mistake.userAnswer?.includes(key) && !mistake.answer?.includes(key)
+            }"
+          >
+            <span class="option-key">{{ key }}.</span>
+            <span class="option-value">{{ option }}</span>
+            <el-icon v-if="mistake.answer?.includes(key)" class="icon-correct">
+              <CircleCheck />
+            </el-icon>
+            <el-icon v-if="mistake.userAnswer?.includes(key) && !mistake.answer?.includes(key)" class="icon-wrong">
+              <CircleClose />
+            </el-icon>
           </div>
-        </template>
+        </div>
 
-        <el-empty v-else-if="!loading" description="错题不存在" />
-      </el-card>
+        <!-- 答案对比 -->
+        <div class="answer-comparison">
+          <div class="answer-item">
+            <span class="label">我的答案：</span>
+            <el-tag type="danger">{{ mistake.userAnswer || '未作答' }}</el-tag>
+          </div>
+          <div class="answer-item">
+            <span class="label">正确答案：</span>
+            <el-tag type="success">{{ mistake.answer }}</el-tag>
+          </div>
+        </div>
 
-      <!-- 操作按钮 -->
-      <div v-if="mistake" class="action-buttons">
-        <el-button @click="goBack">返回</el-button>
-        <el-button type="primary" @click="startReview">开始复习</el-button>
-        <el-button :type="mistake.isFavorite ? 'warning' : 'default'" @click="toggleMark">
-          {{ mistake.isFavorite ? '取消收藏' : '收藏' }}
-        </el-button>
+        <!-- 解析 -->
+        <div v-if="mistake.analysis" class="explanation">
+          <h4>解析</h4>
+          <p>{{ mistake.analysis }}</p>
+        </div>
+
+        <!-- 错误信息 -->
+        <div class="mistake-info">
+          <el-descriptions :column="2" border>
+            <el-descriptions-item label="错误次数">{{ mistake.reviewCount }}</el-descriptions-item>
+            <el-descriptions-item label="掌握状态">
+              <el-tag :type="getStatusTag(mistake.masteryLevel)">
+                {{ getStatusLabel(mistake.masteryLevel) }}
+              </el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="下次复习">{{ formatDate(mistake.nextReviewAt) }}</el-descriptions-item>
+            <el-descriptions-item label="记录时间">{{ formatDate(mistake.createdAt) }}</el-descriptions-item>
+          </el-descriptions>
+        </div>
       </div>
+    </el-card>
+
+    <el-empty v-else-if="!loading" description="错题不存在" />
+
+    <!-- 操作按钮 -->
+    <div v-if="mistake" class="action-buttons">
+      <el-button @click="goBack">返回</el-button>
+      <el-button @click="goToEdit">编辑</el-button>
+      <el-button type="primary" @click="startReview">开始复习</el-button>
+      <el-button :type="mistake.isFavorite ? 'warning' : 'default'" @click="toggleMark">
+        {{ mistake.isFavorite ? '取消收藏' : '收藏' }}
+      </el-button>
     </div>
-  </MainLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import MainLayout from '@/components/layout/MainLayout.vue';
 import { CircleCheck, CircleClose } from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
 import { mistakeApi } from '@/api/mistake';
@@ -115,7 +111,7 @@ const parseOptions = computed(() => {
   const lines = options.split('\n').filter((line: string) => line.trim());
   const result: Record<string, string> = {};
   lines.forEach((line: string, index: number) => {
-    const match = line.match(/^[A-Z][.、\\s]*(.+)/);
+    const match = line.match(/^[A-Z][.、\s]*(.+)/);
     if (match) {
       result[labels[index]] = match[1];
     } else {
@@ -128,7 +124,13 @@ const parseOptions = computed(() => {
 const loadMistake = async () => {
   loading.value = true;
   try {
-    mistake.value = await mistakeApi.getById(route.params.id as string);
+    const response = await mistakeApi.getById(route.params.id as string);
+    console.log('API Response:', response);
+    const data = response.data;
+    console.log('Mistake data:', data);
+    // 直接赋值给 mistake.value
+    mistake.value = data;
+    console.log('Mistake.value after assignment:', mistake.value);
   } catch (error) {
     console.error('加载错题详情失败:', error);
   } finally {
@@ -138,6 +140,10 @@ const loadMistake = async () => {
 
 const goBack = () => {
   router.back();
+};
+
+const goToEdit = () => {
+  router.push(`/mistake/${route.params.id}/edit`);
 };
 
 const startReview = () => {
@@ -170,15 +176,15 @@ const getTypeLabel = (type: string) => {
 };
 
 const getTypeTag = (type: string) => {
-  const tags: Record<string, any> = {
-    choice: '',
+  const tags: Record<string, string> = {
+    choice: 'primary',
     'choice-multi': 'warning',
     judge: 'info',
     fill: 'success',
     essay: 'warning',
-    other: ''
+    other: 'info'
   };
-  return tags[type] || '';
+  return tags[type] || 'info';
 };
 
 const getDifficultyLabel = (difficulty: string) => {
@@ -191,17 +197,28 @@ const getDifficultyLabel = (difficulty: string) => {
 };
 
 const getDifficultyTag = (difficulty: string) => {
-  const tags: Record<string, any> = {
+  const tags: Record<string, string> = {
     easy: 'success',
     medium: 'warning',
     hard: 'danger'
   };
-  return tags[difficulty] || '';
+  return tags[difficulty] || 'info';
 };
 
 const getSubjectLabel = (subject: string | { name: string; code?: string }) => {
   if (typeof subject === 'object' && subject?.name) {
     return subject.name;
+  }
+  // 如果是字符串ID，映射到科目名称
+  if (typeof subject === 'string') {
+    const subjectMap: Record<string, string> = {
+      politics: '政治理论',
+      general: '常识判断',
+      verbal: '言语理解',
+      reasoning: '判断推理',
+      quant: '数量关系'
+    };
+    return subjectMap[subject] || subject;
   }
   return subject || '';
 };

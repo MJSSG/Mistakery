@@ -58,6 +58,11 @@ const routes: RouteRecordRaw[] = [
         path: ':id',
         component: () => import('@/views/mistake/MistakeDetailView.vue'),
         meta: { title: '错题详情' }
+      },
+      {
+        path: ':id/edit',
+        component: () => import('@/views/mistake/MistakeEditView.vue'),
+        meta: { title: '编辑错题' }
       }
     ]
   },

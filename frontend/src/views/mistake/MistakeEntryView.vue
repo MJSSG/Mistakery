@@ -203,6 +203,7 @@ const parseOptions = (optionsStr?: string) => {
 
 const handleSubjectSelect = (id: string) => {
   console.log('Selected subject:', id);
+  formData.subjectId = id;
 };
 
 const handleParse = (content: string) => {
