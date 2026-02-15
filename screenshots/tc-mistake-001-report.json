@@ -1,0 +1,20 @@
+{
+  "test_name": "TC-MISTAKE-001: 智能解析",
+  "passed": [
+    "题型识别为单选题",
+    "正确答案提取正确",
+    "用户答案提取正确",
+    "控制台无错误"
+  ],
+  "failed": [
+    "解析内容提取错误",
+    "预览面板检查失败: Locator.inner_text: Error: strict mode violation: locator(\".preview-panel, .entry-sidebar\") resolved to 2 elements:\n    1) <div data-v-5b7aa26e=\"\" class=\"entry-sidebar\">…</div> aka get_by_role(\"main\").locator(\"div\").filter(has_text=\"解析预览 确认录入 选择题中等题目：资本主义的基本矛盾是什么？选项：A.生产和消费的矛盾B.无产阶级和资产阶级的矛盾C.私人劳动和社会劳动的矛盾D\").nth(2)\n    2) <div data-v-5e6d23b8=\"\" data-v-5b7aa26e=\"\" class=\"preview-panel\">…</div> aka get_by_text(\"解析预览 确认录入 选择题中等题目：资本主义的基本矛盾是什么？选项：A.生产和消费的矛盾B.无产阶级和资产阶级的矛盾C.私人劳动和社会劳动的矛盾D\")\n\nCall log:\nwaiting for locator(\".preview-panel, .entry-sidebar\")\n"
+  ],
+  "details": {
+    "question_type": "single (单选)",
+    "correct_answer": "D",
+    "user_answer": "A",
+    "analysis": "empty",
+    "console_errors": 0
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "test_case": "TC-MISTAKE-002",
+  "test_name": "保存错题",
+  "date": "2026-02-15T12:17:19.113255",
+  "environment": "localhost:5173",
+  "steps": [
+    {
+      "step": "步骤1: 访问登录页",
+      "status": "in_progress",
+      "details": "",
+      "timestamp": "2026-02-15T12:17:27.350320"
+    },
+    {
+      "step": "步骤1: 访问登录页",
+      "status": "fail",
+      "details": "访问失败: function takes exactly 5 arguments (1 given)",
+      "timestamp": "2026-02-15T12:17:29.796651"
+    }
+  ],
+  "checks": [],
+  "api_requests": [
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/login",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:27.866838"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/@vite/client",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:27.954721"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/vite/dist/client/env.mjs",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:27.969209"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/main.ts",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.035932"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/vue.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.083278"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/pinia.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.094734"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.705856"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/@element-plus_icons-vue.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.723561"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/router/index.ts",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.723561"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/dist/index.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.723561"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-G3PMV62Z.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.736565"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-HYZ2CRGS.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.738565"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-YFT6OQ5R.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.739565"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-REBK7YBW.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.743566"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/App.vue",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.744566"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-QZC7O2C6.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.774196"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/App.vue?vue&type=style&index=0&scoped=7a7a37b1&lang.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.774196"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/vue-router.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.776195"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-SHOVIX7B.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.776195"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/@id/__x00__plugin-vue:export-helper",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.787601"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/assets/styles/global.scss",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.881631"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-CYAZEPUX.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:28.918362"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/favicon.svg",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.059081"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/views/auth/LoginView.vue",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.087926"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_dialog_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.152434"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_form_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.168587"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_base_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.168587"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_button_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.173588"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_link_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.176588"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.181590"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_checkbox_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.181590"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_form-item_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.185590"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_icon_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.186590"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/element-plus_es_components_input_style_css.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.186590"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/stores/auth.ts",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.199989"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-3RBMSLV2.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.205729"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-overlay.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.210376"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-form.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.211552"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-dialog.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.214844"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-WXWCZGMG.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.214844"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-link.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.220866"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-form-item.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.221866"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-NKEGBXSM.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.221866"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/chunk-2EZ5VZJO.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.221866"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/views/auth/LoginView.vue?vue&type=style&index=0&scoped=409777eb&lang.scss",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.231869"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/base.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.231869"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-checkbox.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.231869"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-button.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.232869"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/element-plus/theme-chalk/el-input.css",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.232869"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/api/auth.ts",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.232869"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/src/api/request.ts",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.237870"
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:5173/node_modules/.vite/deps/axios.js?v=a6d99985",
+      "status": 200,
+      "timestamp": "2026-02-15T12:17:29.241871"
+    }
+  ],
+  "errors": [
+    {
+      "error": "function takes exactly 5 arguments (1 given)",
+      "timestamp": "2026-02-15T12:17:29.796651"
+    }
+  ]
+}
