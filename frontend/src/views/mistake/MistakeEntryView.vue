@@ -234,6 +234,12 @@ const handleParse = (content: string) => {
     if (line.trim() === '解析' || line.trim().startsWith('解析')) {
       inAnalysis = true;
       inOptions = false;
+
+      // 如果当前行包含解析内容（格式：解析：内容），提取并添加
+      const contentMatch = line.trim().match(/^[解析:：]\s*(.+)$/);
+      if (contentMatch && contentMatch[1]) {
+        analysisLines.push(contentMatch[1].trim());
+      }
       continue;
     }
 

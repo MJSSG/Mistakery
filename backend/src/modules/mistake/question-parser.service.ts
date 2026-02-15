@@ -168,15 +168,20 @@ export class QuestionParserService {
    */
   private extractAnalysis(content: string): string {
     const patterns = [
-      /解析[：:]\s*([\s\S]*?)(?=(?:考点|知识点|$))/i,
-      /分析[：:]\s*([\s\S]*?)(?=(?:考点|知识点|$))/i,
-      /题目解析[：:]\s*([\s\S]*?)(?=(?:考点|知识点|$))/i,
+      // 支持"解析："或"解析："前缀，提取到行尾或遇到关键词为止
+      // 支持多行解析内容
+      /解析[：:]\s*(.+?)(?=\s*(?:考点|知识点|答案|我的答案|正确答案|$))/is,
+      /分析[：:]\s*(.+?)(?=\s*(?:考点|知识点|答案|我的答案|正确答案|$))/is,
+      /题目解析[：:]\s*(.+?)(?=\s*(?:考点|知识点|答案|我的答案|正确答案|$))/is,
     ];
 
     for (const pattern of patterns) {
       const match = content.match(pattern);
       if (match) {
-        return match[1].trim();
+        let analysis = match[1].trim();
+        // 清理可能的换行符和多余空白
+        analysis = analysis.replace(/\s+/g, ' ').trim();
+        return analysis;
       }
     }
 
