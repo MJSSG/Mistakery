@@ -1,10 +1,11 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Mistake } from './entities/mistake.entity';
 import { Subject } from '../subject/entities/subject.entity';
 import { QuestionParserService } from './question-parser.service';
 import { CreateMistakeDto, UpdateMistakeDto, QueryMistakeDto, ParsedMistake } from './dto/mistake.dto';
+import { CacheService } from '../cache/cache.service';
 
 @Injectable()
 export class MistakeService {
@@ -14,6 +15,7 @@ export class MistakeService {
     @InjectRepository(Subject)
     private subjectRepository: Repository<Subject>,
     private questionParser: QuestionParserService,
+    private cacheService: CacheService,
   ) {}
 
   async parseContent(content: string): Promise<ParsedMistake> {
@@ -221,7 +223,13 @@ export class MistakeService {
     }
 
     Object.assign(mistake, updateDto);
-    return this.mistakeRepository.save(mistake);
+    const result = await this.mistakeRepository.save(mistake);
+
+    // 使缓存失效
+    await this.cacheService.del(`mistake:${id}`);
+    // await this.cacheService.del(`mistake:list:*`); // TODO: 实现模式删除
+
+    return result;
   }
 
   async updateMastery(id: string, masteryLevel: string) {
