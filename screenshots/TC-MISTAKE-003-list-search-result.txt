@@ -1,0 +1,76 @@
+uid=41_0 RootWebArea "错题本 - Mistakery" url="http://localhost:5173/mistake/list"
+  uid=41_1 banner
+    uid=41_2 button
+    uid=41_3 heading "错题本" level="1"
+    uid=41_4 generic
+      uid=41_5 textbox "搜索错题..."
+    uid=41_6 button
+    uid=41_7 button "t testuser" expandable haspopup="menu"
+  uid=41_8 complementary
+    uid=41_9 menubar orientation="horizontal"
+      uid=41_10 menuitem "首页"
+      uid=41_11 menuitem "错题管理" expandable expanded
+        uid=41_12 menu orientation="vertical"
+          uid=41_13 menuitem "录入错题"
+          uid=41_14 menuitem "错题本"
+      uid=41_15 menuitem "练习中心" expandable
+      uid=41_16 menuitem "复习计划"
+      uid=41_17 menuitem "学习统计"
+      uid=41_18 menuitem "个人中心" expandable
+  uid=41_19 main
+    uid=41_20 heading "错题本" level="1"
+    uid=41_21 StaticText "1 道错题"
+    uid=41_22 button "导入"
+    uid=41_23 button "录入错题"
+    uid=41_24 StaticText "筛选条件"
+    uid=41_25 button "重置"
+    uid=41_26 StaticText "关键词"
+    uid=41_27 generic
+      uid=41_28 textbox "搜索题目内容..." focusable focused value="马克思主义"
+    uid=41_29 StaticText "科目"
+    uid=41_30 generic
+      uid=41_31 combobox expandable haspopup="listbox"
+      uid=44_0 StaticText "全部科目"
+    uid=41_33 StaticText "难度"
+    uid=41_34 generic
+      uid=41_35 combobox expandable haspopup="listbox"
+      uid=41_36 StaticText "全部难度"
+    uid=41_37 StaticText "排序方式"
+    uid=41_38 generic
+      uid=41_39 combobox expandable haspopup="listbox"
+      uid=41_40 StaticText "最近添加"
+    uid=45_0 StaticText "找到 1 道错题"
+    uid=45_1 checkbox
+    uid=45_2 StaticText "中等"
+    uid=45_3 StaticText "政治理论"
+    uid=45_4 StaticText "新增"
+    uid=45_5 button expandable haspopup="menu"
+    uid=45_6 StaticText "1."
+    uid=45_7 StaticText "马克思主义的三个组成部分是？"
+    uid=45_8 StaticText "我的答案:"
+    uid=45_9 StaticText "AB"
+    uid=45_10 StaticText "正确答案:"
+    uid=45_11 StaticText "ABC"
+    uid=45_12 StaticText "复习 0 次"
+    uid=45_13 StaticText "今天"
+    uid=45_14 StaticText "Total 1"
+    uid=44_42 generic
+      uid=44_43 combobox expandable haspopup="listbox"
+      uid=44_44 StaticText "20/page"
+    uid=44_45 button "Go to previous page" disableable disabled
+    uid=44_46 listitem "page 1" level="1"
+      uid=44_47 StaticText "1"
+    uid=44_48 button "Go to next page" disableable disabled
+    uid=44_49 StaticText "Go to"
+    uid=44_50 generic
+      uid=44_51 spinbutton "Page" value="1" valuemax="1" valuemin="1" valuetext="1"
+  uid=41_92 contentinfo
+    uid=41_93 StaticText "© 2026 Mistakery. 高效学习，智能复习"
+    uid=41_94 link "GitHub" url="https://github.com/"
+      uid=41_95 StaticText "GitHub"
+    uid=41_96 link "关于我们" url="http://localhost:5173/mistake/list#"
+      uid=41_97 StaticText "关于我们"
+    uid=41_98 link "使用协议" url="http://localhost:5173/mistake/list#"
+      uid=41_99 StaticText "使用协议"
+    uid=41_100 link "隐私政策" url="http://localhost:5173/mistake/list#"
+      uid=41_101 StaticText "隐私政策"
