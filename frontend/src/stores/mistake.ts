@@ -51,9 +51,9 @@ export const useMistakeStore = defineStore('mistake', () => {
       const response = await mistakeApi.update(id, data as any);
       const index = mistakes.value.findIndex(m => m.id === id);
       if (index !== -1) {
-        mistakes.value[index] = response;
+        mistakes.value[index] = response.data;
       }
-      return response;
+      return response.data;
     } finally {
       loading.value = false;
     }
