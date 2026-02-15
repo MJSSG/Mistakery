@@ -1,0 +1,332 @@
+<testsuites id="" name="" tests="20" failures="20" skipped="0" errors="0" time="6.35152">
+<testsuite name="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" timestamp="2026-02-15T04:39:01.822Z" hostname="chromium" tests="4" failures="4" skipped="0" time="0.008" errors="0">
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:43:3 TC-MISTAKE-001.1: 智能解析 - 完整流程验证" type="FAILURE">
+<![CDATA[  [chromium] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:43:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:134:3 TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" type="FAILURE">
+<![CDATA[  [chromium] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:134:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:150:3 TC-MISTAKE-001.3: 边界测试 - 多行解析内容" type="FAILURE">
+<![CDATA[  [chromium] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:150:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:176:3 TC-MISTAKE-001.4: 答案格式变体测试" type="FAILURE">
+<![CDATA[  [chromium] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:176:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" timestamp="2026-02-15T04:39:01.822Z" hostname="firefox" tests="4" failures="4" skipped="0" time="0.009" errors="0">
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.003">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:43:3 TC-MISTAKE-001.1: 智能解析 - 完整流程验证" type="FAILURE">
+<![CDATA[  [firefox] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:43:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\firefox-1509\firefox\firefox.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:134:3 TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" type="FAILURE">
+<![CDATA[  [firefox] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:134:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\firefox-1509\firefox\firefox.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:150:3 TC-MISTAKE-001.3: 边界测试 - 多行解析内容" type="FAILURE">
+<![CDATA[  [firefox] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:150:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\firefox-1509\firefox\firefox.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:176:3 TC-MISTAKE-001.4: 答案格式变体测试" type="FAILURE">
+<![CDATA[  [firefox] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:176:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\firefox-1509\firefox\firefox.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" timestamp="2026-02-15T04:39:01.822Z" hostname="webkit" tests="4" failures="4" skipped="0" time="0.011" errors="0">
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.003">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:43:3 TC-MISTAKE-001.1: 智能解析 - 完整流程验证" type="FAILURE">
+<![CDATA[  [webkit] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:43:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.003">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:134:3 TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" type="FAILURE">
+<![CDATA[  [webkit] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:134:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.003">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:150:3 TC-MISTAKE-001.3: 边界测试 - 多行解析内容" type="FAILURE">
+<![CDATA[  [webkit] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:150:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:176:3 TC-MISTAKE-001.4: 答案格式变体测试" type="FAILURE">
+<![CDATA[  [webkit] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:176:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" timestamp="2026-02-15T04:39:01.822Z" hostname="Mobile Chrome" tests="4" failures="4" skipped="0" time="0.009" errors="0">
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:43:3 TC-MISTAKE-001.1: 智能解析 - 完整流程验证" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:43:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:134:3 TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:134:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.003">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:150:3 TC-MISTAKE-001.3: 边界测试 - 多行解析内容" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:150:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:176:3 TC-MISTAKE-001.4: 答案格式变体测试" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:176:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\chromium-1208\chrome-win64\chrome.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" timestamp="2026-02-15T04:39:01.822Z" hostname="Mobile Safari" tests="4" failures="4" skipped="0" time="0.006" errors="0">
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:43:3 TC-MISTAKE-001.1: 智能解析 - 完整流程验证" type="FAILURE">
+<![CDATA[  [Mobile Safari] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:43:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.1: 智能解析 - 完整流程验证 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.002">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:134:3 TC-MISTAKE-001.2: 反向测试 - 缺少解析内容" type="FAILURE">
+<![CDATA[  [Mobile Safari] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:134:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.2: 反向测试 - 缺少解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.001">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:150:3 TC-MISTAKE-001.3: 边界测试 - 多行解析内容" type="FAILURE">
+<![CDATA[  [Mobile Safari] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:150:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.3: 边界测试 - 多行解析内容 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+<testcase name="TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试" classname="tests\mistake\TC-MISTAKE-001-parsing.spec.ts" time="0.001">
+<failure message="TC-MISTAKE-001-parsing.spec.ts:176:3 TC-MISTAKE-001.4: 答案格式变体测试" type="FAILURE">
+<![CDATA[  [Mobile Safari] › tests\mistake\TC-MISTAKE-001-parsing.spec.ts:176:3 › TC-MISTAKE-001 智能解析错题录入 › TC-MISTAKE-001.4: 答案格式变体测试 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\MJSSG\AppData\Local\ms-playwright\webkit-2248\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>

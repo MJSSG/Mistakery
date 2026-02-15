@@ -22,26 +22,15 @@ async function bootstrap() {
 
   // 启用 CORS（生产环境应更严格）
   app.enableCors({
-    origin: process.env.FRONTEND_URL?.split(',') || ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'],
+    origin: process.env.FRONTEND_URL?.split(',') || true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token', 'Access-Control-Allow-Headers'],
     exposedHeaders: ['X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-RateLimit-Reset'],
     maxAge: 86400, // 24小时
   });
 
-  // 添加额外的 CORS 中间件确保正确的响应头
-  app.use((req, res, next) => {
-    const origin = req.headers.origin || '*';
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-CSRF-Token');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    if (req.method === 'OPTIONS') {
-      return res.status(204).end();
-    }
-    next();
-  });
+  // CORS 配置已由 app.enableCors 全局处理，无需额外的中间件
 
   // 安全头部
   app.use((req, res, next) => {

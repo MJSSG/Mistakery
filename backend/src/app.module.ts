@@ -40,8 +40,8 @@ import { AppCacheModule } from './modules/cache/cache.module';
     DatabaseModule,
     // RedisModule,  // Redis 未运行，暂时禁用
 
-    // 缓存模块 (暂时禁用，有版本兼容问题)
-    // AppCacheModule,
+    // 缓存模块
+    AppCacheModule,
 
     // 认证模块
     PassportModule.register({ defaultStrategy: 'jwt' }),
