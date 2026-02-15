@@ -1,0 +1,102 @@
+uid=46_0 RootWebArea "错题本 - Mistakery" url="http://localhost:5173/mistake/list"
+  uid=46_1 banner
+    uid=46_2 button
+    uid=46_3 heading "错题本" level="1"
+    uid=46_4 generic
+      uid=46_5 textbox "搜索错题..."
+    uid=46_6 button
+    uid=46_7 button "t testuser" expandable haspopup="menu"
+  uid=46_8 complementary
+    uid=46_9 menubar orientation="horizontal"
+      uid=46_10 menuitem "首页"
+      uid=46_11 menuitem "错题管理" expandable expanded
+        uid=46_12 menu orientation="vertical"
+          uid=46_13 menuitem "录入错题"
+          uid=46_14 menuitem "错题本"
+      uid=46_15 menuitem "练习中心" expandable
+      uid=46_16 menuitem "复习计划"
+      uid=46_17 menuitem "学习统计"
+      uid=46_18 menuitem "个人中心" expandable
+  uid=46_19 main
+    uid=46_20 heading "错题本" level="1"
+    uid=46_21 StaticText "3 道错题"
+    uid=46_22 button "导入"
+    uid=46_23 button "录入错题"
+    uid=46_24 StaticText "筛选条件"
+    uid=46_25 button "重置"
+    uid=46_26 StaticText "关键词"
+    uid=46_27 generic
+      uid=46_28 textbox "搜索题目内容..."
+    uid=46_29 StaticText "科目"
+    uid=46_30 generic
+      uid=46_31 combobox expandable haspopup="listbox"
+      uid=46_32 StaticText "全部科目"
+    uid=46_33 StaticText "难度"
+    uid=46_34 generic
+      uid=46_35 combobox expandable haspopup="listbox"
+      uid=46_36 StaticText "全部难度"
+    uid=46_37 StaticText "排序方式"
+    uid=46_38 generic
+      uid=46_39 combobox expandable haspopup="listbox"
+      uid=46_40 StaticText "最近添加"
+    uid=46_41 StaticText "找到 3 道错题"
+    uid=46_42 checkbox
+    uid=46_43 StaticText "中等"
+    uid=46_44 StaticText "政治理论"
+    uid=46_45 StaticText "新增"
+    uid=46_46 button expandable haspopup="menu"
+    uid=46_47 StaticText "1."
+    uid=46_48 StaticText "马克思主义的三个组成部分是？"
+    uid=46_49 StaticText "我的答案:"
+    uid=46_50 StaticText "AB"
+    uid=46_51 StaticText "正确答案:"
+    uid=46_52 StaticText "ABC"
+    uid=46_53 StaticText "复习 0 次"
+    uid=46_54 StaticText "今天"
+    uid=46_55 checkbox
+    uid=46_56 StaticText "中等"
+    uid=46_57 StaticText "政治理论"
+    uid=46_58 StaticText "新增"
+    uid=46_59 button expandable haspopup="menu"
+    uid=46_60 StaticText "2."
+    uid=46_61 StaticText "下列关于计算机操作系统的说法中，正确的是："
+    uid=46_62 StaticText "我的答案:"
+    uid=46_63 StaticText "未作答"
+    uid=46_64 StaticText "正确答案:"
+    uid=46_65 StaticText "A"
+    uid=46_66 StaticText "复习 0 次"
+    uid=46_67 StaticText "今天"
+    uid=46_68 checkbox
+    uid=46_69 StaticText "中等"
+    uid=46_70 StaticText "政治理论"
+    uid=46_71 StaticText "新增"
+    uid=46_72 button expandable haspopup="menu"
+    uid=46_73 StaticText "3."
+    uid=46_74 StaticText "下列关于唯物主义的说法正确的是：A. 物质决定意识，意识反作用于物质 B. 意识对物质具有决定作用 C. 物质和意识互不相干 D. 意识是物质的派生物 正确答案：A 解析：物质决定意识"
+    uid=46_75 StaticText "我的答案:"
+    uid=46_76 StaticText "未作答"
+    uid=46_77 StaticText "正确答案:"
+    uid=46_78 StaticText "A"
+    uid=46_79 StaticText "复习 0 次"
+    uid=46_80 StaticText "昨天"
+    uid=46_81 StaticText "Total 3"
+    uid=46_82 generic
+      uid=46_83 combobox expandable haspopup="listbox"
+      uid=46_84 StaticText "20/page"
+    uid=46_85 button "Go to previous page" disableable disabled
+    uid=46_86 listitem "page 1" level="1"
+      uid=46_87 StaticText "1"
+    uid=46_88 button "Go to next page" disableable disabled
+    uid=46_89 StaticText "Go to"
+    uid=46_90 generic
+      uid=46_91 spinbutton "Page" value="1" valuemax="1" valuemin="1" valuetext="1"
+  uid=46_92 contentinfo
+    uid=46_93 StaticText "© 2026 Mistakery. 高效学习，智能复习"
+    uid=46_94 link "GitHub" url="https://github.com/"
+      uid=46_95 StaticText "GitHub"
+    uid=46_96 link "关于我们" url="http://localhost:5173/mistake/list#"
+      uid=46_97 StaticText "关于我们"
+    uid=46_98 link "使用协议" url="http://localhost:5173/mistake/list#"
+      uid=46_99 StaticText "使用协议"
+    uid=46_100 link "隐私政策" url="http://localhost:5173/mistake/list#"
+      uid=46_101 StaticText "隐私政策"
